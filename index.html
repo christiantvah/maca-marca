@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maca y la marca · Novela visual de Gestión de Producto y Marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Backgrounds (solid, no transparency in critical surfaces) */
+  --bg:#0d1426; --bg-2:#070c1a;
+  --surface:#1a2543; --surface-2:#243059; --surface-3:#2e3c70;
+  /* Borders */
+  --border:#3a4a78; --border-2:#536693;
+  /* Text — high contrast */
+  --text:#ffffff; --text-2:#dde4f4; --text-3:#a6b4d3;
+  /* Brand */
+  --primary:#6c8df0; --primary-d:#3a5cd0; --primary-l:#9bb5ff;
+  --pink:#ec4899; --pink-l:#f9a8d4;
+  /* Semantic */
+  --gold:#fbbf24; --gold-l:#fcd34d; --gold-d:#d97706;
+  --success:#34d399; --success-d:#10b981;
+  --danger:#f87171; --danger-d:#dc2626;
+  --info:#22d3ee; --purple:#c084fc;
+  /* Effects */
+  --r-sm:10px; --r-md:16px; --r-lg:22px;
+  --shadow:0 14px 44px rgba(0,0,0,.55), 0 2px 8px rgba(0,0,0,.3);
+  --shadow-soft:0 6px 18px rgba(0,0,0,.35);
+  --scene:#6c8df0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg-2);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  font-size:16px;
+  line-height:1.55;
+}
+h1,h2,h3,h4{font-family:'Sora',sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1.2;color:var(--text)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* STAGE */
+.stage{position:relative;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);isolation:isolate}
+.scene-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 110% 60% at 50% 0%, var(--scene) 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  opacity:.18;
+  transition:opacity .8s ease;
+}
+.scene-deco{display:none}
+
+/* TOP BAR */
+.topbar{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  flex-wrap:wrap;gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+.tb-left{display:flex;align-items:center;gap:14px}
+.logo{
+  width:42px;height:42px;border-radius:12px;
+  background:linear-gradient(135deg, var(--primary), var(--pink));
+  display:grid;place-items:center;
+  font-weight:800;color:#fff;font-size:16px;
+  box-shadow:0 4px 14px rgba(108,141,240,.5);
+}
+.tb-title{font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:var(--text);line-height:1.2}
+.tb-title small{display:block;color:var(--text-3);font-weight:500;font-size:12px;margin-top:3px}
+.tb-right{display:flex;align-items:center;gap:10px}
+.bar{
+  height:8px;width:160px;
+  background:var(--surface-3);border-radius:999px;overflow:hidden;
+  border:1px solid var(--border);
+}
+.bar i{
+  display:block;height:100%;
+  background:linear-gradient(90deg, var(--primary), var(--pink));
+  border-radius:999px;transition:width .5s ease;
+  box-shadow:0 0 12px rgba(108,141,240,.5);
+}
+.icon-btn{
+  width:42px;height:42px;border-radius:12px;
+  background:var(--surface-2);border:1px solid var(--border);
+  display:grid;place-items:center;font-size:18px;
+  color:var(--text);transition:all .2s;
+}
+.icon-btn:hover{background:var(--surface-3);border-color:var(--border-2)}
+
+/* MAIN */
+.main{
+  position:relative;z-index:5;flex:1;
+  display:flex;flex-direction:column;
+  padding:26px 18px 80px;gap:18px;width:100%;
+}
+
+/* SCENE STRIP */
+.scene-strip{
+  display:flex;align-items:center;gap:16px;
+  padding:14px 18px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:5px solid var(--scene);
+  border-radius:var(--r-md);
+  max-width:820px;margin:0 auto;width:100%;
+  box-shadow:var(--shadow-soft);
+}
+.scene-strip-emoji{font-size:36px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3));flex-shrink:0}
+.scene-strip-info{flex:1;min-width:0}
+.scene-strip-name{font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:var(--text);line-height:1.2}
+.scene-strip-when{font-size:13px;color:var(--text-3);margin-top:3px}
+.scene-strip-tag{
+  font-size:10px;font-weight:800;color:#0d1426;
+  text-transform:uppercase;letter-spacing:.08em;
+  padding:5px 11px;background:var(--scene);border-radius:999px;
+  font-family:'Sora',sans-serif;flex-shrink:0;
+}
+
+/* PANEL (dialogue) */
+.panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:28px 30px 22px;
+  box-shadow:var(--shadow);
+  max-width:820px;margin:0 auto;width:100%;
+  animation:slideUp .35s ease;
+}
+.speaker{display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.avatar{
+  width:60px;height:60px;border-radius:50%;
+  display:grid;place-items:center;font-size:32px;
+  flex-shrink:0;
+  border:3px solid var(--surface-2);
+  box-shadow:0 6px 18px rgba(0,0,0,.4);
+}
+.avatar.maca{background:linear-gradient(135deg,#f472b6,#ec4899)}
+.avatar.carlos{background:linear-gradient(135deg,#a16207,#78350f)}
+.avatar.vale{background:linear-gradient(135deg,#06b6d4,#3b82f6)}
+.avatar.tito{background:linear-gradient(135deg,#f59e0b,#dc2626)}
+.avatar.lia{background:linear-gradient(135deg,#10b981,#059669)}
+.avatar.sofia{background:linear-gradient(135deg,#a855f7,#ec4899)}
+.avatar.narr{background:var(--surface-3);font-size:24px;border-color:var(--border)}
+.spk-name{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;color:var(--text);line-height:1.2}
+.spk-role{color:var(--text-3);font-size:13px;font-weight:500;margin-top:3px}
+.dia-text{font-size:17px;line-height:1.7;color:var(--text)}
+.dia-text.thought{font-style:italic;color:var(--text-2)}
+.dia-text.narr{font-style:italic;color:var(--text-2);font-size:16px;text-align:center;padding:8px 0}
+.dia-text em{color:var(--gold-l);font-style:normal;font-weight:600}
+.dia-text strong{color:var(--primary-l);font-weight:700}
+
+.next{margin-top:22px;display:flex;justify-content:flex-end;align-items:center;gap:14px;flex-wrap:wrap}
+.btn{
+  padding:13px 26px;border-radius:14px;
+  font-weight:700;font-size:15px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;border:1px solid transparent;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:linear-gradient(135deg, var(--primary), var(--primary-d));
+  color:#fff;
+  box-shadow:0 6px 20px rgba(108,141,240,.45), inset 0 1px 0 rgba(255,255,255,.15);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(108,141,240,.55)}
+.btn-ghost{background:var(--surface-2);border-color:var(--border);color:var(--text)}
+.btn-ghost:hover{background:var(--surface-3);border-color:var(--border-2)}
+.btn-gold{
+  background:linear-gradient(135deg, var(--gold-l), var(--gold-d));
+  color:#1a0f00;font-weight:800;
+  box-shadow:0 6px 20px rgba(245,158,11,.45);
+}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+.tap-hint{color:var(--text-3);font-size:13px;animation:pulse-soft 1.4s ease-in-out infinite}
+@keyframes pulse-soft{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* LEARN CARD */
+.learn{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:32px 30px 24px;
+  margin:0 auto;max-width:820px;width:100%;
+  box-shadow:var(--shadow);
+  animation:slideUp .35s ease;
+  position:relative;
+}
+.learn:before{
+  content:"📖";
+  position:absolute;top:-22px;left:24px;
+  background:linear-gradient(135deg, var(--primary), var(--info));
+  width:48px;height:48px;border-radius:50%;
+  display:grid;place-items:center;font-size:22px;
+  box-shadow:0 8px 22px rgba(108,141,240,.55);
+  border:3px solid var(--bg);
+}
+.learn h3{font-size:24px;margin-bottom:8px;color:var(--text);padding-top:6px}
+.learn .sub{color:var(--text-3);margin-bottom:18px;font-size:14px;font-style:italic}
+.learn p{font-size:15px;line-height:1.7;color:var(--text-2);margin-bottom:8px}
+.learn ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.learn ul li{padding-left:34px;position:relative;font-size:15px;line-height:1.6;color:var(--text-2)}
+.learn ul li:before{
+  content:"●";position:absolute;left:0;top:1px;
+  color:var(--primary-l);font-size:11px;
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(108,141,240,.18);
+  display:grid;place-items:center;
+  border:1px solid rgba(108,141,240,.3);
+}
+.learn ul.numbered{counter-reset:n}
+.learn ul.numbered li:before{
+  counter-increment:n;content:counter(n);
+  font-weight:800;font-size:12px;color:#fff;
+  background:linear-gradient(135deg, var(--primary), var(--primary-d));
+  border-color:var(--primary);
+}
+.diagram{
+  display:grid;gap:8px;margin:16px 0;
+  padding:16px;background:var(--surface-2);
+  border-radius:var(--r-md);border:1px solid var(--border);
+}
+.dia-box{
+  background:var(--surface-3);padding:12px 16px;
+  border-radius:12px;font-size:14px;line-height:1.5;
+  display:flex;align-items:center;gap:12px;
+  color:var(--text-2);border:1px solid var(--border);
+}
+.dia-box .num{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg, var(--primary), var(--primary-d));
+  color:#fff;display:grid;place-items:center;
+  font-weight:800;font-size:13px;flex-shrink:0;
+}
+.dia-box span:first-child:not(.num){font-size:24px;flex-shrink:0;line-height:1}
+.dia-box strong{color:var(--text);font-weight:700}
+.dia-box em{color:var(--gold-l);font-style:normal;font-weight:600}
+.dia-arrow{text-align:center;color:var(--primary-l);font-size:20px;margin:-2px 0}
+.dia-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.dia-2col>div{
+  background:var(--surface-2);
+  padding:14px 16px;border-radius:12px;
+  font-size:14px;line-height:1.6;
+  color:var(--text-2);
+  border:1px solid var(--border);
+}
+.dia-2col h5{
+  font-size:12px;margin-bottom:8px;
+  color:var(--gold-l);text-transform:uppercase;
+  letter-spacing:.08em;
+  font-family:'Sora',sans-serif;font-weight:800;
+}
+.dia-2col em{color:var(--text-3);font-style:italic;font-weight:400}
+.dia-2col strong{color:var(--text);font-weight:700}
+.dia-2col.vs > div:first-child{border-color:rgba(248,113,113,.45);background:linear-gradient(135deg, rgba(248,113,113,.1), var(--surface-2))}
+.dia-2col.vs > div:first-child h5{color:var(--danger)}
+.dia-2col.vs > div:last-child{border-color:rgba(52,211,153,.45);background:linear-gradient(135deg, rgba(52,211,153,.1), var(--surface-2))}
+.dia-2col.vs > div:last-child h5{color:var(--success)}
+
+/* MINI CHALLENGE */
+.mini-wrap{
+  background:var(--surface);
+  border:2px solid var(--gold-d);
+  border-radius:var(--r-lg);
+  padding:32px 30px 24px;
+  margin:0 auto;max-width:820px;width:100%;
+  box-shadow:var(--shadow), 0 0 30px rgba(245,158,11,.18);
+  animation:slideUp .35s ease;
+  position:relative;
+}
+.mini-wrap:before{
+  content:"🎯";
+  position:absolute;top:-22px;left:24px;
+  background:linear-gradient(135deg, var(--gold-l), var(--gold-d));
+  width:48px;height:48px;border-radius:50%;
+  display:grid;place-items:center;font-size:22px;
+  box-shadow:0 8px 22px rgba(245,158,11,.55);
+  border:3px solid var(--bg);
+}
+.mini-wrap h3{font-size:21px;margin-bottom:8px;color:var(--text);padding-top:6px}
+.mini-wrap .sub{color:var(--text-2);margin-bottom:20px;font-size:15px;line-height:1.65}
+.mini-feedback{
+  margin-top:18px;padding:16px 18px;
+  border-radius:var(--r-md);
+  border:1px solid var(--border);
+  background:var(--surface-2);
+  font-size:15px;line-height:1.65;color:var(--text-2);
+  animation:slideUp .3s ease;
+}
+.mini-feedback.ok{
+  border-color:var(--success);
+  background:linear-gradient(135deg, rgba(52,211,153,.14), var(--surface-2));
+  color:var(--text);
+}
+.mini-feedback.no{
+  border-color:var(--danger);
+  background:linear-gradient(135deg, rgba(248,113,113,.14), var(--surface-2));
+  color:var(--text);
+}
+
+/* OPTIONS */
+.opts{display:grid;gap:10px}
+.opt{
+  background:var(--surface-2);
+  border:2px solid var(--border);
+  border-radius:14px;
+  padding:16px 18px;text-align:left;
+  font-size:15px;line-height:1.5;
+  display:flex;align-items:center;gap:14px;
+  transition:all .15s;color:var(--text);width:100%;
+}
+.opt:hover:not(:disabled){border-color:var(--primary-l);background:var(--surface-3);transform:translateX(3px)}
+.opt:disabled{cursor:default}
+.opt .let{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--surface-3);
+  display:grid;place-items:center;
+  font-weight:800;font-family:'Sora',sans-serif;
+  flex-shrink:0;font-size:13px;color:var(--text);
+  border:1px solid var(--border);
+}
+.opt.correct{border-color:var(--success);background:linear-gradient(135deg, rgba(52,211,153,.2), var(--surface-2))}
+.opt.correct .let{background:var(--success);color:#0d1426;border-color:var(--success)}
+.opt.wrong{border-color:var(--danger);background:linear-gradient(135deg, rgba(248,113,113,.2), var(--surface-2))}
+.opt.wrong .let{background:var(--danger);color:#fff;border-color:var(--danger)}
+.opt.dim{opacity:.4}
+
+/* ORDER */
+.ord-list{display:flex;flex-direction:column;gap:10px;margin:8px 0}
+.ord-item{
+  background:var(--surface-2);
+  border:2px solid var(--border);
+  border-radius:14px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+  font-size:15px;user-select:none;color:var(--text);
+}
+.ord-item .pos{
+  width:32px;height:32px;border-radius:10px;
+  background:linear-gradient(135deg, var(--primary), var(--primary-d));
+  color:#fff;display:grid;place-items:center;
+  font-weight:800;font-family:'Sora',sans-serif;
+  font-size:14px;flex-shrink:0;
+}
+.ord-controls{display:flex;gap:6px;margin-left:auto}
+.ord-btn{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--surface-3);border:1px solid var(--border);
+  display:grid;place-items:center;
+  font-weight:700;font-size:14px;color:var(--text);
+  transition:all .15s;
+}
+.ord-btn:hover:not(:disabled){background:var(--primary);border-color:var(--primary)}
+.ord-btn:disabled{opacity:.3;cursor:not-allowed}
+.ord-item.ok{border-color:var(--success);background:linear-gradient(135deg, rgba(52,211,153,.14), var(--surface-2))}
+.ord-item.bad{border-color:var(--danger);background:linear-gradient(135deg, rgba(248,113,113,.14), var(--surface-2))}
+.ord-fix{font-size:13px;color:var(--success);margin-top:6px;width:100%;font-weight:600}
+
+/* MATCH */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+.match-col{display:flex;flex-direction:column;gap:10px}
+.match-item{
+  background:var(--surface-2);
+  border:2px solid var(--border);
+  border-radius:14px;padding:14px;
+  font-size:14px;line-height:1.45;cursor:pointer;
+  transition:all .15s;min-height:64px;
+  display:flex;align-items:center;gap:10px;color:var(--text);
+}
+.match-item:hover:not(.matched){border-color:var(--primary-l);background:var(--surface-3)}
+.match-item.selected{
+  border-color:var(--primary-l);
+  background:linear-gradient(135deg, rgba(108,141,240,.22), var(--surface-2));
+  box-shadow:0 0 0 3px rgba(108,141,240,.25);
+}
+.match-item.matched{border-color:var(--success);background:linear-gradient(135deg, rgba(52,211,153,.14), var(--surface-2));cursor:default;opacity:.95}
+.match-item.matched-bad{border-color:var(--danger);background:linear-gradient(135deg, rgba(248,113,113,.14), var(--surface-2))}
+.match-item .tag{
+  display:inline-block;
+  background:linear-gradient(135deg, var(--primary), var(--primary-d));
+  color:#fff;font-size:11px;font-weight:800;
+  padding:4px 9px;border-radius:8px;
+  flex-shrink:0;font-family:'Sora',sans-serif;
+}
+
+/* MAP / DRAG */
+.map-grid{display:grid;gap:10px;margin:8px 0}
+.map-grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.map-slot{
+  background:var(--surface-2);
+  border:2px dashed var(--border-2);
+  border-radius:14px;padding:14px 16px;
+  min-height:74px;
+  display:flex;flex-direction:column;gap:6px;
+  transition:all .15s;
+}
+.map-slot.over{border-color:var(--primary-l);background:var(--surface-3)}
+.map-slot.filled{border-style:solid;border-color:var(--primary);background:linear-gradient(135deg, rgba(108,141,240,.12), var(--surface-2))}
+.map-slot.ok{border-color:var(--success);background:linear-gradient(135deg, rgba(52,211,153,.14), var(--surface-2))}
+.map-slot.bad{border-color:var(--danger);background:linear-gradient(135deg, rgba(248,113,113,.14), var(--surface-2))}
+.slot-lbl{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;font-weight:700;font-family:'Sora',sans-serif}
+.slot-val{font-size:14px;line-height:1.45;min-height:20px;color:var(--text)}
+.tags-bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding-top:18px;border-top:1px solid var(--border)}
+.tag-pill{
+  background:var(--surface-3);
+  border:1px solid var(--primary-l);
+  color:var(--text);
+  border-radius:999px;padding:9px 16px;
+  font-size:14px;cursor:grab;transition:all .15s;
+  user-select:none;font-weight:500;
+}
+.tag-pill:hover{transform:translateY(-2px);background:linear-gradient(135deg, rgba(108,141,240,.28), var(--surface-3));box-shadow:0 4px 12px rgba(108,141,240,.3)}
+.tag-pill.dragging{opacity:.4}
+.tag-pill.placed{display:none}
+.tag-pill.sel{outline:2px solid var(--gold);outline-offset:3px;background:linear-gradient(135deg, rgba(251,191,36,.22), var(--surface-3))}
+
+/* V/F */
+.vf-row{display:flex;gap:14px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.vf-btn{
+  flex:1;min-width:140px;max-width:200px;padding:22px;
+  border-radius:14px;
+  background:var(--surface-2);
+  border:2px solid var(--border);
+  font-size:17px;font-weight:700;
+  font-family:'Sora',sans-serif;
+  transition:all .15s;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--text);
+}
+.vf-btn:hover:not(:disabled){border-color:var(--primary-l);background:var(--surface-3);transform:scale(1.04)}
+.vf-btn .ico{font-size:30px}
+.vf-btn.correct{border-color:var(--success);background:linear-gradient(135deg, rgba(52,211,153,.2), var(--surface-2));color:var(--success)}
+.vf-btn.wrong{border-color:var(--danger);background:linear-gradient(135deg, rgba(248,113,113,.2), var(--surface-2));color:var(--danger)}
+
+/* POV */
+.pov-frame{
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:14px;padding:22px 18px;
+  font-size:16px;line-height:2;text-align:center;margin:8px 0;
+  display:flex;flex-wrap:wrap;
+  align-items:center;justify-content:center;gap:10px;
+  color:var(--text);
+}
+.pov-slot{
+  display:inline-block;min-width:160px;
+  background:var(--surface-3);
+  border:2px dashed var(--border-2);
+  border-radius:10px;padding:9px 14px;
+  color:var(--text-3);font-size:14px;
+  cursor:pointer;font-weight:500;transition:all .15s;
+}
+.pov-slot.filled{border-style:solid;border-color:var(--primary);color:var(--text);background:linear-gradient(135deg, rgba(108,141,240,.2), var(--surface-3))}
+.pov-slot.ok{border-color:var(--success);background:linear-gradient(135deg, rgba(52,211,153,.2), var(--surface-3))}
+.pov-slot.bad{border-color:var(--danger);background:linear-gradient(135deg, rgba(248,113,113,.2), var(--surface-3))}
+.pov-fix{color:var(--text-2);font-weight:600}
+.pov-bank{margin-top:18px}
+.pov-bank-lbl{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;display:block;font-family:'Sora',sans-serif}
+.pov-bank-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+
+/* CHOICE */
+.choices{display:flex;flex-direction:column;gap:12px;margin:8px 0}
+.choice-btn{
+  background:var(--surface-2);
+  border:2px solid var(--border);
+  border-radius:14px;
+  padding:18px 18px 18px 52px;
+  text-align:left;
+  font-size:15px;line-height:1.55;
+  transition:all .15s;color:var(--text);
+  position:relative;width:100%;
+}
+.choice-btn:before{
+  content:"➤";
+  position:absolute;left:20px;top:18px;
+  color:var(--primary-l);font-size:16px;
+}
+.choice-btn:hover{border-color:var(--primary-l);background:var(--surface-3);transform:translateX(5px)}
+.choice-btn:disabled{cursor:not-allowed}
+
+/* JOURNAL */
+.journal{
+  background:linear-gradient(180deg,#fff8e7,#ffeec4);
+  border-radius:var(--r-lg);
+  padding:34px 38px;
+  margin:0 auto;max-width:720px;width:100%;
+  box-shadow:0 30px 80px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.5);
+  color:#3d2900;font-family:'Caveat',cursive;
+  background-image:repeating-linear-gradient(transparent 0,transparent 33px,rgba(0,0,0,.06) 34px);
+  position:relative;
+  animation:slideUp .35s ease;
+}
+.journal:before{content:"";position:absolute;left:38px;top:0;bottom:0;width:2px;background:rgba(232,69,69,.35)}
+.journal-title{font-size:32px;font-weight:700;margin-bottom:18px;line-height:34px}
+.journal-title:before{content:"📓 ";font-family:'Inter',sans-serif}
+.journal ul{list-style:none}
+.journal ul li{font-size:21px;line-height:34px;padding-left:18px;position:relative;color:#3d2900}
+.journal ul li:before{content:"✏️";font-family:'Inter',sans-serif;position:absolute;left:-10px;top:7px;font-size:14px}
+.journal .next{margin-top:22px}
+.journal .next .btn{background:#3d2900;color:#fff8e7;font-family:'Inter',sans-serif}
+
+/* CHAPTER CARD */
+.chapter-card{margin:0 auto;max-width:640px;text-align:center;padding:50px 30px;animation:fadeIn .6s ease}
+.chapter-num{font-family:'Caveat',cursive;font-size:26px;color:var(--primary-l);margin-bottom:8px}
+.chapter-title{
+  font-size:clamp(30px,5vw,46px);margin-bottom:14px;
+  background:linear-gradient(135deg, #fff, var(--primary-l));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1.15;
+}
+.chapter-tag{font-family:'Caveat',cursive;font-size:24px;color:var(--gold-l);margin-bottom:28px}
+.chapter-art{font-size:120px;margin:18px 0;line-height:1;filter:drop-shadow(0 12px 30px rgba(108,141,240,.5))}
+
+/* WELCOME */
+.welcome{margin:0 auto;max-width:720px;text-align:center;padding:30px 24px;animation:fadeIn .8s ease}
+.welcome h1{
+  font-size:clamp(34px,6vw,54px);margin-bottom:14px;
+  background:linear-gradient(135deg, #fff, var(--pink) 50%, var(--primary-l));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1.1;letter-spacing:-.03em;
+}
+.welcome .tag{font-family:'Caveat',cursive;font-size:26px;color:var(--gold-l);margin-bottom:24px}
+.welcome .desc{color:var(--text-2);font-size:16px;line-height:1.7;margin-bottom:30px;max-width:560px;margin-left:auto;margin-right:auto}
+.welcome .maca-hero{font-size:140px;line-height:1;margin:18px 0;filter:drop-shadow(0 16px 40px rgba(236,72,153,.45))}
+.cast{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:28px 0}
+.cast-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);padding:16px 10px;
+  transition:all .2s;
+}
+.cast-card:hover{border-color:var(--primary-l);transform:translateY(-3px)}
+.cast-emoji{font-size:42px;margin-bottom:8px;line-height:1}
+.cast-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--text)}
+.cast-role{color:var(--text-3);font-size:11px;margin-top:3px;line-height:1.3}
+.row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+
+/* FINAL */
+.final{margin:0 auto;max-width:720px;text-align:center;padding:30px 24px;animation:fadeIn .8s ease}
+.final-stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:28px 0}
+.final-stat .box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px 14px}
+.final-stat .num{
+  font-family:'Sora',sans-serif;font-size:32px;font-weight:800;
+  background:linear-gradient(135deg, var(--primary-l), var(--pink));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.final-stat .lab{color:var(--text-3);font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin-top:4px;font-weight:600}
+
+/* HINT */
+.hint-box{
+  background:linear-gradient(135deg, rgba(245,158,11,.18), var(--surface-2));
+  border:1px solid var(--gold);
+  border-radius:var(--r-md);padding:14px 16px;
+  margin-top:14px;font-size:14px;line-height:1.6;color:var(--gold-l);
+}
+
+/* CONFETTI */
+.confetti{position:fixed;top:-12px;width:10px;height:14px;pointer-events:none;z-index:999;border-radius:2px}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
+.shake{animation:shake .35s ease}
+
+/* RESPONSIVE */
+@media (max-width:680px){
+  body{font-size:15px}
+  .topbar{padding:12px 14px}
+  .main{padding:18px 12px 60px;gap:14px}
+  .panel{padding:22px 20px 18px}
+  .learn,.mini-wrap{padding:26px 20px 20px}
+  .scene-strip{padding:12px 14px;gap:12px}
+  .scene-strip-emoji{font-size:30px}
+  .match-grid{grid-template-columns:1fr}
+  .pov-frame{font-size:15px;line-height:1.8;padding:18px 14px}
+  .pov-slot{min-width:120px;font-size:13px;padding:7px 12px}
+  .vf-btn{padding:18px;font-size:16px}
+  .vf-btn .ico{font-size:26px}
+  .bar{width:90px}
+  .tb-title small{display:none}
+  .dia-text{font-size:16px}
+  .learn h3{font-size:21px}
+  .mini-wrap h3{font-size:19px}
+  .opt{font-size:14px;padding:14px}
+  .ord-item{font-size:14px;padding:12px 14px}
+  .match-item{font-size:13px;padding:12px}
+  .journal{padding:26px 24px}
+  .journal-title{font-size:26px}
+  .journal ul li{font-size:18px;line-height:30px}
+  .chapter-art{font-size:90px}
+  .welcome .maca-hero{font-size:110px}
+  .avatar{width:50px;height:50px;font-size:26px}
+  .spk-name{font-size:16px}
+}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="scene-bg" id="bg"></div>
+  <div class="scene-deco" id="deco"></div>
+  <div class="topbar" id="topbar"></div>
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+/* =============================================================
+   MACA Y LA MARCA — Novela visual interactiva
+   Curso: Gestión de Producto y Marca
+   ============================================================= */
+
+const STORAGE_KEY='gpm_novel_v2';
+
+// ----------- ESCENARIOS (fondos + decoración) -----------
+const SCENES={
+  apartment:{tint:'#ec4899',emoji:'🏠',name:'Departamento de Maca',when:'lunes, 7:14 a.m.',tag:'inicio'},
+  street:{tint:'#f59e0b',emoji:'🚌',name:'Avenida camino al mercado',when:'mañana · 8:30 a.m.',tag:'tránsito'},
+  market:{tint:'#10b981',emoji:'🥬',name:'Mercado de Magdalena',when:'8:50 a.m.',tag:'cap. 1'},
+  cafe:{tint:'#a16207',emoji:'☕',name:'Café Tostado, Barranco',when:'tarde · 3:00 p.m.',tag:'cap. 3'},
+  coworking:{tint:'#6366f1',emoji:'💻',name:'Coworking, Miraflores',when:'mañana · 11:30 a.m.',tag:'cap. 2'},
+  workshop:{tint:'#f97316',emoji:'🔧',name:'Taller de Lía, Lince',when:'tarde · 5:30 p.m.',tag:'cap. 4'},
+  studio:{tint:'#a855f7',emoji:'🎨',name:'Estudio de Sofía, San Isidro',when:'noche · 7:00 p.m.',tag:'cap. 5'},
+  launch:{tint:'#fb923c',emoji:'🚀',name:'Bodega de Maca',when:'día del lanzamiento · 6:00 a.m.',tag:'epílogo'},
+  night:{tint:'#6366f1',emoji:'🌙',name:'Departamento de Maca',when:'esa noche · 21:48',tag:'epílogo'}
+};
+
+// ----------- PERSONAJES -----------
+const CHARS={
+  maca:{name:'Maca',role:'emprendedora · 24 años',cls:'maca',emoji:'👩🏽'},
+  carlos:{name:'Don Carlos',role:'comerciante · 40 años en el mercado',cls:'carlos',emoji:'👨🏽'},
+  vale:{name:'Vale',role:'ingeniera · amiga tech',cls:'vale',emoji:'👩🏻‍💻'},
+  tito:{name:'Tito',role:'diseñador estratégico',cls:'tito',emoji:'👨🏾‍🎨'},
+  lia:{name:'Lía',role:'maker · ingeniera de prototipos',cls:'lia',emoji:'🧑🏼‍🔧'},
+  sofia:{name:'Sofía',role:'consultora de marca',cls:'sofia',emoji:'👩🏼‍🎤'},
+  narr:{name:'Narrador',role:'',cls:'narr',emoji:'📖'},
+  thought:{name:'Maca (en su mente)',role:'',cls:'maca',emoji:'💭'}
+};
+
+// ----------- HELPERS PARA CONSTRUIR LA HISTORIA -----------
+const beats=[];
+function s(scene,title){beats.push({t:'scene',scene,title});}
+function n(text){beats.push({t:'narr',text});}
+function d(c,text){beats.push({t:'dial',c,text});}
+function think(text){beats.push({t:'dial',c:'thought',text,thought:true});}
+function learn(title,sub,body){beats.push({t:'learn',title,sub,body});}
+function mini(data){beats.push({t:'mini',...data});}
+function journal(title,items){beats.push({t:'journal',title,items});}
+function chapter(num,title,tag,art,scene){beats.push({t:'chapter',num,title,tag,art,scene});}
+function ending(){beats.push({t:'ending'});}
+
+/* ===========================================================
+   PRÓLOGO
+=========================================================== */
+chapter('Prólogo','Maca tiene una idea','... y un cuaderno casi vacío','💡','apartment');
+s('apartment','Lima, lunes 7:14 a.m. — Departamento de Maca');
+n('Una taza de café humea sobre la mesa. Un cuaderno con la frase "MI MARCA" en la portada espera abierto.');
+d('maca','Hoy es el día. Llevo tres años trabajando para otros. Tengo ahorros, tengo una idea, y tengo este cuaderno.');
+d('maca','Quiero lanzar una marca de bebidas naturales hechas con frutas peruanas. Algo bonito, sano, sostenible. Mi marca.');
+think('Pero, ¿por dónde empiezo? Si invierto mal, me como mis ahorros en seis meses.');
+d('narr','Maca enciende su laptop, busca "cómo lanzar un producto" y se pierde entre 47 pestañas abiertas. Cierra todo.');
+d('maca','Necesito mentores reales. Voy a salir y voy a aprender de personas que ya lo hicieron. Me anoto cinco paradas.');
+n('Maca escribe en su cuaderno: 1) Mercado · 2) Cómo construir · 3) Insights · 4) Probar · 5) Marca.');
+d('maca','Ahora sí. Primera parada: el mercado de mi barrio. Quiero ver y escuchar a la gente real.');
+mini({
+  k:'choice',
+  title:'Maca toma su primera decisión',
+  sub:'Tiene tres opciones para empezar. ¿Qué le sugieres?',
+  options:[
+    {text:'Empezar diseñando el logo y el packaging — lo bonito vende','msg:':'wrong','reply':'Tito (su mentor de diseño que conocerá luego) le diría: «el logo sin entender al cliente es decoración, no marca».'},
+    {text:'Salir a investigar el mercado y entender al cliente real','msg:':'right','reply':'Don Carlos asiente desde su puesto del mercado. «Así empieza todo, mija. Sin mercado, no hay producto».'},
+    {text:'Pedir un préstamo grande y producir 10 mil unidades de una vez','msg:':'wrong','reply':'Mala idea. Si nadie las compra, Maca queda con deuda y bodega llena. Primero hay que validar.'}
+  ],
+  correct:1,
+  feedback:'Excelente. La regla de oro de Lean Startup: «no construyas lo que nadie necesita». Toda marca empieza por el mercado.'
+});
+d('maca','Listo, mi cuaderno y mis zapatillas. Vamos.');
+
+/* ===========================================================
+   CAPÍTULO 1 — ESTUDIO DE MERCADO
+=========================================================== */
+chapter('Capítulo 1','El Mercado','¿Quién es tu cliente, mija?','🥬','market');
+s('street','Camino al mercado · 8:30 a.m.');
+n('Maca camina por la avenida con su cuaderno bajo el brazo. El olor a pan recién horneado se mezcla con el bullicio del mercado de la esquina.');
+s('market','Mercado de Magdalena · 8:50 a.m.');
+n('Don Carlos atiende su puesto de jugos naturales. Lleva 40 años ahí. Conoce a cada cliente por su nombre.');
+d('carlos','¡Maca! Tu mamá me dijo que te andas metiendo a emprendedora. Cuéntame.');
+d('maca','Don Carlos, voy a sacar una marca de bebidas naturales. Pero antes de invertir, quiero entender el mercado.');
+d('carlos','Bien hecho, mija. Antes que el producto, primero el cliente. ¿Sabes qué es un estudio de mercado?');
+d('maca','Más o menos... ¿es como hacer encuestas?');
+d('carlos','Es más profundo. Mira, te lo explico como a mis nietos.');
+learn('¿Qué es un estudio de mercado?',
+  'Don Carlos saca una libreta y dibuja:',
+  `<p>Es un <strong>proceso sistemático</strong> para obtener información útil de tus clientes actuales y potenciales: cuántos son, quiénes son, qué compran, a quién, con qué frecuencia.</p>
+   <div class="diagram"><div class="dia-box"><span>🎯</span><div><strong>Finalidad:</strong> disminuir el riesgo en tus decisiones de marketing operativo: <em>producto, precio, plaza y promoción</em> (las 4P).</div></div></div>`);
+d('carlos','Sin esto, decides a ciegas. Y a ciegas se pierde plata.');
+d('carlos','Para no perderte, hay siete pasos. Te los digo en orden, porque uno desordenado no sirve.');
+learn('Los 7 pasos del estudio de mercado',
+  'En este orden exacto:',
+  `<ul class="numbered">
+   <li>Definir el <strong>problema</strong> y los objetivos</li>
+   <li>Diseñar la <strong>investigación</strong> y las fuentes</li>
+   <li>Diseñar el <strong>método y técnica</strong></li>
+   <li>Diseñar la <strong>muestra</strong> (tu segmento)</li>
+   <li><strong>Recolectar</strong> la información</li>
+   <li><strong>Procesar</strong> los datos</li>
+   <li><strong>Analizar</strong>, interpretar y comunicar</li>
+   </ul>`);
+d('maca','Wow. Lo voy a ordenar yo en mi cuaderno para que se me grabe.');
+mini({
+  k:'orden',
+  title:'Maca ordena los 7 pasos en su cuaderno',
+  sub:'Arrastra con las flechas hasta el orden correcto:',
+  items:["Recolección de información","Definición del problema y objetivos","Análisis, interpretación y comunicación","Diseño de investigación y fuentes","Procesamiento de información","Diseño de la muestra (segmento)","Diseño del método y técnica"],
+  orden:[1,3,6,5,0,4,2],
+  ok:'Perfecto. El orden es problema → investigación → método → muestra → recolectar → procesar → analizar.',
+  no:'Casi. Recuerda: empieza siempre por el problema, termina siempre por comunicar resultados.'
+});
+d('carlos','Ahora hablemos de fuentes. ¿De dónde sacas la información?');
+learn('Fuentes primarias vs. secundarias',
+  'Dos cubos para llenar tu balde:',
+  `<div class="dia-2col">
+    <div><h5 style="color:#4ade80">PRIMARIAS</h5>Las generas TÚ, específicamente para tu investigación.<br><em style="color:#bcc4d8">Encuestas, entrevistas, focus groups, observación.</em></div>
+    <div><h5 style="color:#22d3ee">SECUNDARIAS</h5>Datos que YA EXISTEN; tú los reutilizas.<br><em style="color:#bcc4d8">INEI, papers, informes, libros, web.</em></div>
+   </div>`);
+d('carlos','Lo bueno es combinar las dos. Lo barato y rápido son las secundarias, lo profundo y específico son las primarias.');
+d('carlos','Ahora pongamos a prueba.');
+mini({
+  k:'mc',
+  title:'Maca clasifica una fuente',
+  sub:'Para entender cuántos peruanos consumen bebidas naturales, Maca encuentra un estudio del Ministerio de Producción. ¿Qué tipo de fuente es?',
+  options:["Primaria (la generó ella misma)","Secundaria (ya existía)","Ninguna de las dos","Una mezcla de ambas"],
+  correct:1,
+  ok:'Correcto. Si Maca no la generó, es secundaria.',
+  no:'Una fuente la genera Maca para SU investigación = primaria. Si la encuentra ya hecha = secundaria.'
+});
+d('carlos','Para escoger el método, depende qué quieras saber. Apunta:');
+learn('Método y técnicas',
+  'Dos grandes familias:',
+  `<div class="dia-2col">
+    <div><h5 style="color:#f5a623">OBSERVACIÓN</h5>Mirar al sujeto sin interactuar. En persona o con cámaras/sensores.</div>
+    <div><h5 style="color:#6c8df0">COMUNICACIÓN</h5>Interactuar con el sujeto: encuestas, entrevistas a profundidad, focus groups, técnicas proyectivas.</div>
+   </div>
+   <p style="font-size:13px;margin-top:10px;color:#bcc4d8">Para motivos profundos → entrevistas o focus group.<br>Para conductas espontáneas → observación.<br>Para volumen y % → encuestas.</p>`);
+d('maca','Don Carlos, ¿y cómo sé a quién aplicar las encuestas? No puedo encuestar a TODO el Perú.');
+d('carlos','Por eso defines tu muestra: tu segmento de mercado. Con cuatro tipos de variables.');
+learn('Las 4 variables de segmentación',
+  'Maca tiene que saber a quién apunta:',
+  `<ul>
+   <li><strong>Socio-demográficas:</strong> edad, sexo, nivel social, cultura, religión.</li>
+   <li><strong>Psicográficas:</strong> personalidad, estilo de vida, gustos personales.</li>
+   <li><strong>De conducta:</strong> beneficio buscado, decisión de compra, riesgo percibido, expectativas.</li>
+   <li><strong>Geográficas:</strong> ubicación, ámbito local-global, zonas.</li>
+   </ul>`);
+mini({
+  k:'match',
+  title:'Maca describe a su cliente y clasifica',
+  sub:'Une cada descripción con el tipo de variable correcto:',
+  left:["Socio-demográfica","Psicográfica","De conducta","Geográfica"],
+  right:["Vive en zonas urbanas costeras","Mujer de 28 a 35 años","Estilo de vida fitness y consciente","Busca bebidas sin azúcar añadida"],
+  pares:[[0,1],[1,2],[2,3],[3,0]],
+  ok:'Bien. Demográfica = datos duros, psicográfica = lifestyle, conducta = decisión, geográfica = lugar.',
+  no:'Recuerda: edad y sexo son socio-demográficas; el lifestyle es psicográfica.'
+});
+d('carlos','Ahora una última cosa. La competencia.');
+d('carlos','Mucha gente piensa que es solo ver precios. Eso es una pavada. Es ver el panorama completo.');
+learn('Análisis de la competencia',
+  'Es ver el panorama del sector:',
+  `<ul>
+   <li>Identificar quiénes producen los <strong>mismos bienes/servicios</strong> en tu segmento.</li>
+   <li>Buscar la máxima información del sector.</li>
+   <li>Identificar a los <strong>líderes</strong> y por qué lo son.</li>
+   <li>Explorar las <strong>percepciones</strong> del consumidor sobre cada uno.</li>
+   </ul>`);
+mini({
+  k:'mc',
+  title:'Maca elige una técnica',
+  sub:'Maca quiere entender por qué sus posibles clientes prefieren la marca líder. Busca motivaciones profundas. ¿Qué técnica es la más adecuada?',
+  options:["Encuesta cerrada online de 50 preguntas","Entrevista a profundidad o focus group","Revisión bibliográfica","Observación con cámara oculta"],
+  correct:1,
+  ok:'Sí. Para motivaciones profundas conversas. La encuesta da volumen, no profundidad.',
+  no:'Para motivaciones profundas necesitas conversar — entrevista a profundidad o focus group.'
+});
+d('carlos','Última prueba antes de soltarte. Te muestro cinco prácticas y me marcas las que están MAL.');
+mini({
+  k:'errores',
+  title:'Errores comunes en estudios de mercado',
+  sub:'Marca todas las prácticas INCORRECTAS:',
+  items:[
+    {txt:"Encuestar solo a 5 amigos cercanos y generalizar al país",error:true},
+    {txt:"Definir el objetivo general antes de empezar",error:false},
+    {txt:"Hacer preguntas dirigidas que sugieren la respuesta",error:true},
+    {txt:"Combinar fuentes primarias y secundarias",error:false},
+    {txt:"Asumir que el mercado no cambia desde hace 5 años",error:true}
+  ],
+  ok:'Bien. Los tres errores clásicos: muestra no representativa, preguntas sesgadas e ignorar cambios.',
+  no:'Pista: la muestra debe ser representativa, las preguntas neutras y el mercado cambia rápido.'
+});
+d('carlos','Listo, Maca. Con eso ya no decides a ciegas. Anótate lo aprendido.');
+journal('Diario de Maca · Capítulo 1',[
+  'Estudio de mercado = proceso sistemático para reducir el riesgo de mis 4 P (producto, precio, plaza, promoción).',
+  '7 pasos en orden: problema → investigación → método → muestra → recolectar → procesar → analizar.',
+  'Fuentes PRIMARIAS las genero yo; SECUNDARIAS ya existen. Lo ideal es combinar.',
+  'Segmento por 4 variables: socio-demográficas, psicográficas, de conducta y geográficas.',
+  'La competencia se analiza viendo todo el panorama, no solo los precios.'
+]);
+d('maca','Gracias, Don Carlos. Ya tengo el mercado. Ahora me toca pensar CÓMO construir.');
+d('carlos','Para eso ve a buscar a Vale, tu amiga la ingeniera. Ella te va a hablar de metodologías ágiles.');
+
+/* ===========================================================
+   CAPÍTULO 2 — METODOLOGÍAS ÁGILES
+=========================================================== */
+chapter('Capítulo 2','El Coworking','Ágil no es correr. Es pensar distinto.','💻','coworking');
+s('coworking','Coworking en Miraflores · 11:30 a.m.');
+n('Maca llega al coworking donde trabaja Vale. Pantallas, post-its, cafés y un letrero: "Done is better than perfect".');
+d('vale','¡Maca! ¿Vienes a trabajar? Pasa, agarra café.');
+d('maca','Vine a aprender. Don Carlos me mandó. Quiero saber cómo construyo mi marca sin tirar plata al tacho.');
+d('vale','Ah, te toca el cambio de mentalidad. Olvida el plan-de-negocios-de-300-páginas. Eso es ingeniería del siglo XX.');
+d('maca','¿Y entonces?');
+d('vale','Mentalidad ágil.');
+learn('¿Qué es ser ágil?',
+  'Vale lo escribe en una pizarra:',
+  `<p>Ágil <strong>no es correr</strong>. Ágil es <strong>pensar distinto</strong>: diseñar el trabajo para que evolucione, crear productos que aprenden de sus usuarios, construir equipos que confían y avanzan juntos.</p>
+   <p style="margin-top:10px">Implica una nueva mentalidad: ajustar sobre la marcha, equipos enfocados en pequeños objetivos que suman al resultado final.</p>`);
+d('vale','Tiene 7 principios. Memoriza los más importantes.');
+learn('Principios ágiles',
+  '',
+  `<ul>
+   <li>Entrega <strong>continua de valor</strong></li>
+   <li><strong>Adaptación</strong> al cambio</li>
+   <li>Trabajo <strong>colaborativo</strong></li>
+   <li><strong>Mejora continua</strong></li>
+   <li>Dinámica de equipo y cultura</li>
+   <li>Retrospectiva y aprendizaje continuo</li>
+   <li>Transformación organizacional</li>
+   </ul>`);
+d('vale','Lo opuesto a esto es el modelo Waterfall: planificas todo de golpe, y al final te llevas la sorpresa de que el cliente quería otra cosa.');
+learn('Tradicional (Waterfall) vs. Ágil',
+  'La diferencia que cambia todo:',
+  `<div class="dia-2col vs">
+    <div><h5>WATERFALL</h5>Planificación rígida y exhaustiva al inicio.<br>Entrega al final.<br>Cliente con participación limitada.<br>Cambios = costosos.</div>
+    <div><h5>ÁGIL</h5>Planificación iterativa y flexible.<br>Entrega continua e incremental.<br>Colaboración constante.<br>Cambios = naturales.</div>
+   </div>`);
+mini({
+  k:'match',
+  title:'Maca empareja características',
+  sub:'Une cada práctica ÁGIL con la práctica TRADICIONAL contraria:',
+  left:["Ágil: Planificación iterativa","Ágil: Entrega continua","Ágil: Adaptación natural","Ágil: Colaboración constante"],
+  right:["Tradicional: Cambios costosos y difíciles","Tradicional: Participación limitada del cliente","Tradicional: Planificación rígida al inicio","Tradicional: Entrega al final del proyecto"],
+  pares:[[0,2],[1,3],[2,0],[3,1]],
+  ok:'Sí. Cada práctica ágil tiene su antítesis en Waterfall.',
+  no:'Iterativa ↔ rígida, continua ↔ al final, adaptación ↔ costosa, colaboración ↔ limitada.'
+});
+d('vale','Mira, en la práctica usamos tres herramientas que se complementan. Te las presento.');
+d('vale','La primera: Lean Startup. Su mantra: "elimina desperdicios y aprende rápido".');
+learn('Lean Startup',
+  'Eric Ries · ciclo Construir → Medir → Aprender',
+  `<div class="diagram">
+    <div class="dia-box"><span class="num">1</span><div><strong>Construir</strong> — desarrollar un MVP, lanzarlo rápido.</div></div>
+    <div class="dia-arrow">↓</div>
+    <div class="dia-box"><span class="num">2</span><div><strong>Medir</strong> — analizar datos, obtener métricas reales.</div></div>
+    <div class="dia-arrow">↓</div>
+    <div class="dia-box"><span class="num">3</span><div><strong>Aprender</strong> — iterar (mejorar) o pivotar (cambiar de rumbo).</div></div>
+   </div>`);
+mini({
+  k:'orden',
+  title:'Maca ordena el ciclo Lean',
+  sub:'Coloca las etapas en el orden correcto:',
+  items:["Aprender (iterar o pivotar)","Construir (lanzar el MVP)","Medir (analizar datos)"],
+  orden:[1,2,0],
+  ok:'¡Eso! Build → Measure → Learn. Sin esa secuencia no hay aprendizaje validado.',
+  no:'Recuerda: primero CONSTRUYES algo mínimo, luego MIDES con usuarios reales, luego APRENDES.'
+});
+d('vale','Segunda: Scrum. Es la metodología del caos controlado: divides el trabajo en sprints cortos.');
+learn('Scrum',
+  'Tres roles que tienes que conocer:',
+  `<ul>
+   <li><strong>Product Owner:</strong> define y prioriza el backlog. Representa al cliente. Mantiene la visión del producto.</li>
+   <li><strong>Scrum Master:</strong> facilita el proceso, elimina impedimentos, guía al equipo.</li>
+   <li><strong>Equipo de Desarrollo:</strong> construye el producto en entregas incrementales.</li>
+   </ul>
+   <p style="margin-top:10px;font-size:13px;color:#bcc4d8">Trabajo en <em>sprints</em> cortos: análisis → desarrollo → testing → repetir.</p>`);
+mini({
+  k:'match',
+  title:'Maca asigna roles de Scrum',
+  sub:'Une cada rol con su función:',
+  left:["Product Owner","Scrum Master","Equipo de Desarrollo"],
+  right:["Facilita el proceso y elimina impedimentos","Define y prioriza el backlog · representa al cliente","Construye el producto en entregas incrementales"],
+  pares:[[0,1],[1,0],[2,2]],
+  ok:'Bien. PO = qué/por qué; SM = cómo trabajamos; Equipo = construye.',
+  no:'PO mantiene la visión, SM cuida el proceso, Equipo entrega.'
+});
+d('vale','Y la tercera, la más cool para empezar: Design Thinking. Sirve para resolver problemas centrándote en el usuario.');
+learn('Design Thinking',
+  'Stanford d.school · 5 fases en orden:',
+  `<div class="diagram">
+    <div class="dia-box"><span class="num">1</span><div><strong>Empatizar</strong> — aprende de la audiencia para la que diseñas.</div></div>
+    <div class="dia-box"><span class="num">2</span><div><strong>Definir</strong> — construye un punto de vista (POV) basado en sus necesidades.</div></div>
+    <div class="dia-box"><span class="num">3</span><div><strong>Idear</strong> — imagina soluciones creativas sin sesgos.</div></div>
+    <div class="dia-box"><span class="num">4</span><div><strong>Prototipar</strong> — construye una representación rápida.</div></div>
+    <div class="dia-box"><span class="num">5</span><div><strong>Evaluar</strong> — vuelve al usuario y obtén su feedback.</div></div>
+   </div>`);
+mini({
+  k:'orden',
+  title:'Maca ordena las 5 fases de Design Thinking',
+  sub:'Arrastra al orden correcto:',
+  items:["Idear","Empatizar","Prototipar","Definir","Evaluar"],
+  orden:[1,3,0,2,4],
+  ok:'Perfecto. Empatizar → Definir → Idear → Prototipar → Evaluar.',
+  no:'Empieza escuchando al usuario; termina probando con él.'
+});
+d('vale','Y ahora la pregunta clave: ¿cómo se relacionan las tres? Porque mucha gente cree que es una o la otra.');
+learn('Las 3 metodologías juntas',
+  'Cada una resuelve una parte:',
+  `<div class="diagram">
+    <div class="dia-box"><span>🔍</span><div><strong>Design Thinking</strong> — explora el problema del cliente.</div></div>
+    <div class="dia-arrow">↓</div>
+    <div class="dia-box"><span>🚀</span><div><strong>Lean Startup</strong> — valida la solución (Build-Measure-Learn).</div></div>
+    <div class="dia-arrow">↓</div>
+    <div class="dia-box"><span>🏃</span><div><strong>Scrum / Agile</strong> — entrega el producto en sprints.</div></div>
+   </div>`);
+mini({
+  k:'mc',
+  title:'Maca decide por dónde empezar',
+  sub:'Maca tiene la idea pero no sabe si su mercado la querrá. ¿Qué metodología usa PRIMERO?',
+  options:["Scrum, para sprints de desarrollo","Design Thinking, para entender el problema y al usuario","Waterfall, para planificar todo de una","Six Sigma para reducir defectos"],
+  correct:1,
+  ok:'Sí. Antes de construir, hay que entender. Después vienen Lean (validar) y Scrum (entregar).',
+  no:'Antes de construir hay que ENTENDER. Eso es Design Thinking.'
+});
+d('vale','Una curiosidad: este movimiento no nació ayer. Tiene 80 años de historia.');
+learn('Evolución hacia el Manifiesto Ágil',
+  'Una línea de tiempo:',
+  `<div class="diagram">
+    <div class="dia-box"><span>🏭</span><div><strong>1940-1970:</strong> Sistema de Producción Toyota — origen del Lean.</div></div>
+    <div class="dia-box"><span>🔁</span><div><strong>1980-1990:</strong> enfoques iterativos (RAD, Scrum).</div></div>
+    <div class="dia-box"><span>⚡</span><div><strong>1999:</strong> Extreme Programming.</div></div>
+    <div class="dia-box"><span>📜</span><div><strong>2001:</strong> Manifiesto Ágil.</div></div>
+   </div>`);
+mini({
+  k:'mc',
+  title:'Maca recuerda los orígenes',
+  sub:'¿Qué hito influyó fuertemente en la creación del Manifiesto Ágil de 2001?',
+  options:["La Revolución Industrial","El Sistema de Producción Toyota (1940-70)","La invención del e-commerce","El boom inmobiliario"],
+  correct:1,
+  ok:'Sí. Toyota fue la cuna del pensamiento Lean.',
+  no:'El origen del Lean está en Toyota — eliminar desperdicios.'
+});
+journal('Diario de Maca · Capítulo 2',[
+  'Ágil = mentalidad. No es correr, es diseñar el trabajo para que evolucione.',
+  'Tradicional planifica al inicio y entrega al final. Ágil itera y entrega continuo.',
+  'Lean Startup: Construir → Medir → Aprender. Iterar o pivotar.',
+  'Scrum: roles PO (visión), SM (proceso), Equipo (construye). Sprints cortos.',
+  'Design Thinking: Empatizar → Definir → Idear → Prototipar → Evaluar. Empezar por aquí.'
+]);
+d('vale','Ahora vete con Tito, mi amigo el diseñador. Te va a enseñar la parte que más cuesta: encontrar el INSIGHT.');
+d('maca','¿El qué?');
+d('vale','Tú anda. Él te explica.');
+
+/* ===========================================================
+   CAPÍTULO 3 — INSIGHT & DEFINIR
+=========================================================== */
+chapter('Capítulo 3','El Café','Un insight no es un dato. Es una verdad humana.','☕','cafe');
+s('cafe','Café Tostado, Barranco · 3:00 p.m.');
+n('Maca espera a Tito en una cafetería llena de gente. Saca su cuaderno y observa a la mesa de al lado: dos chicas pidiendo "algo healthy pero rico, sin culpa".');
+d('tito','Maca, perdón el retraso. ¿Y? ¿Qué traes?');
+d('maca','Vale me dijo que tú me ibas a explicar qué es un insight. ¿Es como un dato?');
+d('tito','No. Es lo opuesto a un dato. Siéntate.');
+learn('Empatizar y Definir',
+  'Las dos primeras fases del Design Thinking:',
+  `<p>En <strong>Empatizar</strong> aprendes de tu audiencia: escuchas, observas, vives sus rituales.</p>
+   <p style="margin-top:10px">En <strong>Definir</strong> sintetizas las necesidades — esos son los <em>insights</em> de tu target. Procesas la información para obtener un POV (Point of View).</p>
+   <p style="margin-top:10px;font-size:13px;color:#bcc4d8">La fase Definir tiene 4 etapas internas:</p>
+   <ul class="numbered">
+    <li>Entender la experiencia (vivencias, frases textuales, sin sesgos).</li>
+    <li>Identificar al usuario (buyer personas con características propias).</li>
+    <li>Articular los insights.</li>
+    <li>Construir el POV.</li>
+   </ul>`);
+d('tito','Pero antes de seguir: ¿qué crees que ES un insight?');
+mini({
+  k:'vf',
+  title:'Maca pone a prueba su entendimiento',
+  sub:'«Un insight es un dato demográfico clave, como ‘el 70% de mis clientes son mujeres jóvenes’.» ¿Verdadero o falso?',
+  correct:false,
+  ok:'¡Bien! No, eso es un dato. Un insight es otra cosa.',
+  no:'Falso. Un dato demográfico no es un insight. Sigamos para entender la diferencia.'
+});
+learn('Qué ES y qué NO ES un insight',
+  'Tito lo dibuja en una servilleta:',
+  `<div class="dia-2col vs">
+    <div><h5>NO ES INSIGHT ❌</h5>Dato demográfico.<br>Porcentaje.<br>Comentario textual / verbatim.<br>Una conducta observada.</div>
+    <div><h5>SÍ ES INSIGHT ✅</h5>Tensión humana latente.<br>Verdad emocional profunda.<br>Comprensión <em>fresca y no obvia</em> de creencias, valores, deseos.<br>Algo que puede convertirse en ventaja competitiva.</div>
+   </div>`);
+d('tito','El caso clásico: Dove. Las marcas mostraban modelos perfectas. Dove encontró un insight.');
+learn('Caso Dove · Real Beauty',
+  '',
+  `<p>Dove descubrió: <em>«las mujeres no se ven tan bellas como realmente son»</em>.</p>
+   <p style="margin-top:10px">Eso no es un dato. Es una <strong>tensión emocional latente</strong>. De ahí nació la campaña <strong>Real Beauty</strong>, que rompió estereotipos publicitarios y se volvió un caso clásico mundial.</p>`);
+mini({
+  k:'errores',
+  title:'Maca evalúa cinco frases',
+  sub:'Marca todas las que NO son insights (son datos disfrazados):',
+  items:[
+    {txt:"«El 65% de mis clientes son mujeres jóvenes»",error:true},
+    {txt:"«Las madres trabajadoras se sienten culpables cuando no cocinan en casa»",error:false},
+    {txt:"«Mis clientes viven en Lima Norte»",error:true},
+    {txt:"«Para los hombres jóvenes, la barba es una declaración de identidad más que un look»",error:false},
+    {txt:"«Mi público compra entre 15 y 30 soles»",error:true}
+  ],
+  ok:'Eso. Datos demográficos y de conducta NO son insights — un insight revela una tensión emocional.',
+  no:'Pista: si la frase es un dato medible, no es insight. Si revela una tensión humana, sí lo es.'
+});
+d('tito','Ahora, ¿cómo se encuentra un insight? Hay herramientas.');
+learn('Herramientas para encontrar insights',
+  '',
+  `<ul>
+   <li><strong>Etnografía:</strong> meterse en el contexto del usuario.</li>
+   <li><strong>Social listening:</strong> escuchar conversaciones digitales.</li>
+   <li><strong>Análisis conductual:</strong> observar comportamientos, no opiniones.</li>
+   <li><strong>Mapas de empatía:</strong> qué piensa, siente, dice y hace.</li>
+   <li><strong>Customer journey profundo</strong>.</li>
+   </ul>`);
+mini({
+  k:'mc',
+  title:'Maca elige herramienta',
+  sub:'¿Cuál de estas NO es una herramienta válida para encontrar insights?',
+  options:["Mapas de empatía","Social listening","Listar precios de la competencia","Análisis conductual y etnografía"],
+  correct:2,
+  ok:'Sí. Listar precios es análisis competitivo, no busca tensiones humanas.',
+  no:'Pista: el insight es emocional, no estructural.'
+});
+d('tito','Cuando ya tienes el insight y al usuario claros, escribes el POV. Es la frase que va a guiar tu fase de ideación.');
+learn('El POV — Point of View',
+  'La fórmula:',
+  `<div class="diagram">
+    <div class="dia-box"><span>👤</span><div>[ <strong>Usuario</strong> ]</div></div>
+    <div class="dia-box"><span>🎯</span><div>necesita [ <strong>problema / verbo</strong> ]</div></div>
+    <div class="dia-box"><span>💡</span><div>porque [ <strong>insight o revelación</strong> ]</div></div>
+   </div>
+   <p style="margin-top:12px;font-size:14px;font-style:italic;color:#bcc4d8">Ejemplo: «Los pequeños emprendedores de mi localidad necesitan innovar en sus formas de venta porque quieren aumentar sus ingresos económicos».</p>`);
+mini({
+  k:'pov',
+  title:'Maca construye su primer POV',
+  sub:'Selecciona la pieza correcta para cada espacio:',
+  plantilla:["[usuario]","necesita","[problema]","porque","[insight]"],
+  bancos:{
+    usuario:["Los ejecutivos de oficina","Los pequeños emprendedores de mi localidad","Los turistas extranjeros"],
+    problema:["leer más libros","innovar en sus formas de venta","aprender finanzas"],
+    insight:["les sobra el dinero","quieren aumentar sus ingresos económicos","tienen mucho tiempo libre"]
+  },
+  correcto:{usuario:1,problema:1,insight:1},
+  ok:'¡Eso! Ese POV te guía toda la siguiente fase de ideación.',
+  no:'Recuerda: el POV es Usuario + necesita + porque (insight emocional, no superficial).'
+});
+d('tito','Antes que ideemos, una herramienta más: la Propuesta de Valor. Une tu solución con el cliente.');
+learn('Lienzo de Propuesta de Valor',
+  'Dos lados que se conectan:',
+  `<div class="dia-2col">
+    <div><h5 style="color:#6c8df0">Lo que ofreces</h5>Productos y servicios<br>Aliviadores de frustraciones<br>Creadores de alegrías</div>
+    <div><h5 style="color:#ff6b9d">El cliente</h5>Trabajos que intenta hacer<br>Frustraciones (miedos)<br>Alegrías (deseos)</div>
+   </div>`);
+mini({
+  k:'mapa',
+  title:'Maca llena el Lienzo',
+  sub:'Coloca cada elemento en el componente correcto:',
+  slots:[{lbl:"Propuesta — alivia el dolor"},{lbl:"Propuesta — crea la alegría"},{lbl:"Cliente — lo que teme/sufre"},{lbl:"Cliente — lo que intenta lograr"}],
+  tags:["Frustraciones del cliente (miedos latentes)","Aliviadores de frustraciones","Trabajos que el cliente intenta hacer","Creadores de alegrías"],
+  orden:[1,3,0,2],
+  ok:'Bien. Aliviadores y creadores son TU PROPUESTA. Frustraciones y trabajos son del CLIENTE.',
+  no:'Lo que ofreces alivia o genera alegría. Lo del cliente son sus dolores y trabajos.'
+});
+d('tito','Una última cosa que pocos toman en serio: la sostenibilidad. Te toca pensar en los 17 ODS y en economía circular. Las 7Rs.');
+learn('7Rs de la economía circular',
+  'Pensar en sostenibilidad ya no es opcional:',
+  `<ul>
+   <li><strong>Reciclar:</strong> convertir residuo en nueva materia prima.</li>
+   <li><strong>Rediseñar:</strong> repensar el producto para que dure y sea reparable.</li>
+   <li><strong>Reducir:</strong> usar menos recursos desde el origen.</li>
+   <li><strong>Reutilizar:</strong> volver a usar el mismo objeto sin transformarlo.</li>
+   <li><strong>Reparar:</strong> arreglar lo que se ha roto en lugar de tirarlo.</li>
+   <li><strong>Renovar:</strong> actualizar productos viejos para alargar su vida.</li>
+   <li><strong>Recuperar:</strong> rescatar materiales de productos al final de su uso.</li>
+   </ul>`);
+mini({
+  k:'match',
+  title:'Maca empareja las 7Rs',
+  sub:'Une cada R con su acción:',
+  left:["Reciclar","Reutilizar","Reparar","Reducir"],
+  right:["Arreglar lo roto en vez de tirarlo","Volver a usar sin transformar","Usar menos desde el origen","Convertir residuo en materia prima"],
+  pares:[[0,3],[1,1],[2,0],[3,2]],
+  ok:'Bien. Cada R atiende un punto distinto del ciclo del producto.',
+  no:'Reciclar transforma; reutilizar repite uso; reparar arregla; reducir consume menos.'
+});
+d('tito','Una cosa más que está en tu sílabo: bien vs servicio. Suena obvio pero confunde a mucha gente.');
+learn('Bien vs. Servicio',
+  '',
+  `<div class="dia-2col">
+    <div><h5 style="color:#f5a623">BIEN</h5>Elemento <strong>material</strong> que representa una utilidad.<br><em>Ej: una botella de bebida.</em></div>
+    <div><h5 style="color:#22d3ee">SERVICIO</h5>Acción o trabajo llevada a cabo por un sujeto en beneficio de otro.<br><em>Ej: una clase de yoga.</em></div>
+   </div>
+   <p style="margin-top:10px;font-size:13px;color:#bcc4d8">Y los productos se clasifican en: bienes de consumo duradero (laptop), destructivo (alimentos), de conveniencia (papel higiénico), de compra esporádica, de especialidad. Y en bienes industriales: materias primas, equipo pesado, materiales, suministros.</p>`);
+d('tito','Última prueba: la diferencia entre creatividad e innovación. Que mucha gente confunde.');
+learn('Creatividad vs. Innovación',
+  '',
+  `<div class="dia-2col">
+    <div><h5 style="color:#ff6b9d">CREATIVIDAD (de Bono)</h5>"Romper con los patrones establecidos para mirar las cosas de una manera diferente".</div>
+    <div><h5 style="color:#6c8df0">INNOVACIÓN (Drucker)</h5>"Encontrar nuevos o mejores usos a los recursos de los que ya disponemos".</div>
+   </div>`);
+mini({
+  k:'mc',
+  title:'Maca define innovar',
+  sub:'Para Peter Drucker, INNOVAR es…',
+  options:["Inventar algo nuevo desde cero","Encontrar nuevos o mejores usos a los recursos que ya tenemos","Copiar a la competencia","Patentar tecnología antes que nadie"],
+  correct:1,
+  ok:'Sí. Innovar no es siempre crear de cero — es resignificar lo existente.',
+  no:'Drucker fue claro: innovar es encontrar nuevos usos a recursos existentes.'
+});
+journal('Diario de Maca · Capítulo 3',[
+  'Insight = verdad emocional latente del usuario, NO un dato demográfico.',
+  'Caso Dove: «las mujeres no se ven tan bellas como realmente son» → Real Beauty.',
+  'POV: [Usuario] necesita [problema] porque [insight].',
+  'Lienzo de Propuesta de Valor: aliviadores y creadores (yo) ↔ trabajos y miedos (cliente).',
+  'Innovar (Drucker) = nuevos usos a recursos existentes. No inventar de cero.'
+]);
+d('tito','Ya tienes el insight, el POV y la propuesta. Ahora hay que materializar — pero rápido y barato.');
+d('maca','¿O sea que ya construyo el producto?');
+d('tito','Aún no. Antes prototipas. Vete con Lía, mi amiga maker. Ella es la reina del prototipo feo y útil.');
+
+/* ===========================================================
+   CAPÍTULO 4 — MVP & PROTOTIPADO
+=========================================================== */
+chapter('Capítulo 4','El Taller','Un prototipo feo te ahorra meses de pulido inútil.','🔧','workshop');
+s('workshop','Taller de Lía, Lince · 5:30 p.m.');
+n('Olor a soldadura y café frío. Lía termina de pegar un prototipo de cartón con cinta adhesiva. Lo levanta y ríe.');
+d('lia','Esto, Maca, es un prototipo. Es feo. Es de cartón. Y va a salvarme de tirar 8 mil soles a la basura.');
+d('maca','¿Por qué? ¿No deberías tener algo más pulido?');
+d('lia','Justamente. Si gasto plata pulindo algo que el usuario odia, perdí. Mejor algo feo y rápido para que me digan qué arreglar.');
+learn('¿Qué es un prototipo?',
+  'Lía lo define así:',
+  `<p>Es la <strong>expresión mínima</strong> para presentar, experimentar y evaluar en interacción directa con el usuario.</p>
+   <p style="margin-top:10px">El error temprano = mejoras sin gastar tiempo ni plata.</p>`);
+d('lia','Tres objetivos. Las 3C.');
+learn('Las 3C del prototipado',
+  '',
+  `<div class="diagram">
+    <div class="dia-box"><span>🛠️</span><div><strong>Construir</strong> — absolver la necesidad de forma cercana a la realidad.</div></div>
+    <div class="dia-box"><span>📣</span><div><strong>Comunicar</strong> — promover interacción directa con el público objetivo. <em>«Un prototipo vale más que mil palabras».</em></div></div>
+    <div class="dia-box"><span>💬</span><div><strong>Conversar</strong> — recoger el feedback de los usuarios.</div></div>
+   </div>`);
+mini({
+  k:'mc',
+  title:'Maca recuerda las 3C',
+  sub:'Los tres objetivos del prototipado son…',
+  options:["Calcular, Comprar y Cobrar","Construir, Comunicar y Conversar","Crear, Copiar y Conservar","Codificar, Comunicar y Cerrar"],
+  correct:1,
+  ok:'Construir, Comunicar, Conversar. Esa es la trilogía.',
+  no:'Las 3C: Construir (acercar), Comunicar (mostrar), Conversar (recoger feedback).'
+});
+d('lia','Ahora, hay tres niveles de prototipo. De más barato a más caro.');
+learn('Niveles de prototipo',
+  'Subiendo en fidelidad:',
+  `<ul class="numbered">
+   <li><strong>Sketch (bosquejo):</strong> dibujo a mano, storyboard. Para mostrar la idea inicial.</li>
+   <li><strong>Baja fidelidad:</strong> primera representación funcional muy básica. Cartón, papel, click dummies.</li>
+   <li><strong>Media fidelidad:</strong> mockup interactivo, video de alta calidad. Cercano al producto real, prueba la experiencia del usuario.</li>
+   </ul>`);
+mini({
+  k:'match',
+  title:'Maca empareja niveles con herramientas',
+  sub:'Une cada nivel con su herramienta típica:',
+  left:["Sketch","Baja fidelidad","Media fidelidad"],
+  right:["Mockup interactivo, video alta calidad","Dibujo a mano, storyboard","Versión funcional muy básica (cartón)"],
+  pares:[[0,1],[1,2],[2,0]],
+  ok:'Bien. De más barato (sketch) a más caro (mockup).',
+  no:'Sketch = dibujo. Baja fidelidad = básico funcional. Media = mockup cercano al real.'
+});
+d('lia','Ahora un concepto que se confunde mucho: el MVP. El padre del término es Eric Ries.');
+learn('MVP · Producto Mínimo Viable',
+  'Eric Ries, Lean Startup:',
+  `<p style="font-size:15px;font-style:italic;color:#ffd166">«La versión de un nuevo producto que permite al equipo recopilar los <strong style="color:#ffd166">máximos conocimientos validados</strong> sobre los clientes con el <strong style="color:#ffd166">menor esfuerzo</strong>».</p>
+   <p style="margin-top:12px">Estrategia para validar una idea de negocio con la menor inversión, obteniendo feedback real ANTES de construir el producto completo.</p>`);
+mini({
+  k:'vf',
+  title:'Maca pone a prueba el concepto',
+  sub:'«Un MVP es una versión incompleta llena de errores que se lanza para ahorrar tiempo.» ¿Verdadero o falso?',
+  correct:false,
+  ok:'Falso. Es mínimo, pero VIABLE — resuelve lo esencial.',
+  no:'Falso. El MVP es mínimo pero VIABLE. Resuelve el problema esencial bien hecho, no es un producto roto.'
+});
+d('lia','Ejemplos clásicos:');
+learn('Características y ejemplos del MVP',
+  '',
+  `<ul>
+   <li><strong>Funcionalidad esencial</strong> — solo lo básico que resuelve el problema. Ej: app de delivery solo con pago + selección de platos.</li>
+   <li><strong>Desarrollo rápido</strong> — Airbnb arrancó con un sitio web simple en pocos días.</li>
+   <li><strong>Validación de mercado</strong> — Dropbox validó su idea con un VIDEO antes de programar nada.</li>
+   <li><strong>Iteración con feedback</strong> — Airbnb iteró su diseño tras feedback de usuarios.</li>
+   <li><strong>Enfoque en el usuario</strong> — Dropbox diseñó la sincronización basándose en las demandas reales.</li>
+   </ul>`);
+mini({
+  k:'match',
+  title:'Maca empareja casos famosos',
+  sub:'Une cada característica del MVP con su ejemplo:',
+  left:["Funcionalidad esencial","Desarrollo rápido","Validación con poco esfuerzo","Iteración con feedback"],
+  right:["Airbnb iteró su diseño tras feedback","Dropbox validó con un video antes de programar","Una app de delivery con solo pago y selección de platos","Airbnb arrancó con un sitio web simple en pocos días"],
+  pares:[[0,2],[1,3],[2,1],[3,0]],
+  ok:'Sí. Cada caso ilustra una característica distinta del MVP.',
+  no:'Pista: Dropbox = video; Airbnb arranque = sitio simple; Airbnb iteración = feedback.'
+});
+d('lia','Ahora el último paso del Design Thinking: testear con usuarios.');
+learn('Fase 5 · Testeo',
+  'Cómo evolucionar la propuesta:',
+  `<p>Perfeccionas la propuesta a partir de pruebas e información obtenida en la experiencia del usuario con el prototipo.</p>
+   <p style="margin-top:10px">Capitalizar lo aprendido = sistematizar la información y mejorar el producto.</p>
+   <p style="margin-top:10px;font-size:13px;color:#bcc4d8">En la entrevista a profundidad evalúas: funcionalidad, calidad esperada, diseño, atractivo, presentación/tamaño, aspectos ambientales.</p>`);
+d('lia','Cuando recoges feedback, lo organizas en una matriz de 4 cuadrantes.');
+learn('Matriz de retroalimentación',
+  '',
+  `<div class="dia-2col">
+    <div><h5 style="color:#4ade80">+ Funcionó</h5>Lo que el usuario amó.</div>
+    <div><h5 style="color:#e84545">△ No funcionó</h5>Lo que rechazó o no entendió.</div>
+   </div>
+   <div class="dia-2col">
+    <div><h5 style="color:#22d3ee">? Pendiente</h5>Lo que aún no resolvimos.</div>
+    <div><h5 style="color:#f5a623">💡 No habíamos pensado</h5>Ideas inesperadas que aparecen.</div>
+   </div>`);
+mini({
+  k:'mapa',
+  title:'Maca clasifica feedback recibido',
+  sub:'Coloca cada comentario en el cuadrante correcto:',
+  slots:[{lbl:"+ Funcionó"},{lbl:"△ No funcionó"},{lbl:"? Pendiente"},{lbl:"💡 No habíamos pensado"}],
+  tags:["«¿Y si lo venden también para diabéticos?»","El precio sigue muy alto, no lo hemos resuelto","El sabor le encantó a 9 de 10","La etiqueta es difícil de leer en góndola"],
+  orden:[2,3,1,0],
+  ok:'Bien. Esa matriz te ordena las próximas iteraciones del producto.',
+  no:'+ lo bueno; △ lo malo; ? pendiente; 💡 sorpresa.'
+});
+d('lia','Una última pregunta para que se grabe.');
+mini({
+  k:'mc',
+  title:'Maca elige el prototipo correcto',
+  sub:'Maca está muy temprano en la idea y solo quiere mostrarla para conversar. ¿Qué nivel de prototipo le sirve?',
+  options:["Producto final","Mockup interactivo de alta fidelidad","Sketch o storyboard","Versión beta cerrada con 1.000 usuarios"],
+  correct:2,
+  ok:'Sí. En fases tempranas, sketches: barato, rápido, comunica.',
+  no:'Cuanto más temprana la fase, más barato debe ser el prototipo. Sketch al inicio.'
+});
+d('lia','Y para cerrar: ¿en qué se ROMPE la lógica del MVP? Marca lo que NO debes hacer.');
+mini({
+  k:'errores',
+  title:'Maca detecta el mal uso del MVP',
+  sub:'Marca todas las prácticas INCORRECTAS:',
+  items:[
+    {txt:"Lanzar el MVP solo cuando el producto esté 100% pulido",error:true},
+    {txt:"Validar con usuarios reales lo antes posible",error:false},
+    {txt:"Construir todo el producto antes de pensar en clientes",error:true},
+    {txt:"Iterar el MVP basándose en feedback",error:false},
+    {txt:"Pivotar si los datos invalidan la hipótesis",error:false}
+  ],
+  ok:'Sí. Esperar la perfección rompe el ciclo Build-Measure-Learn.',
+  no:'El MVP existe para no esperar la perfección. Validas rápido y aprendes.'
+});
+journal('Diario de Maca · Capítulo 4',[
+  'Prototipo = expresión mínima para presentar, experimentar y evaluar.',
+  '3C del prototipado: Construir, Comunicar, Conversar.',
+  '3 niveles: sketch (dibujo), baja fidelidad (funcional básico), media fidelidad (mockup).',
+  'MVP (Eric Ries) = máximo aprendizaje validado con mínimo esfuerzo.',
+  'Matriz de retroalimentación: +, △, ?, 💡.'
+]);
+d('lia','Ya casi tienes producto. Pero te falta el alma de la marca: cómo se llama, qué dice, cómo suena.');
+d('lia','Vete a ver a Sofía. Ella vive del naming.');
+
+/* ===========================================================
+   CAPÍTULO 5 — NAMING & MARCA
+=========================================================== */
+chapter('Capítulo 5','El Estudio','Sin nombre no hay marca. Sin registro, no hay nombre.','🎨','studio');
+s('studio','Estudio de Sofía, San Isidro · 7:00 p.m.');
+n('Paredes color rosa palo. Mood boards en una pared. Sofía termina una llamada y voltea hacia Maca.');
+d('sofia','Maca, llegaste. Tito me contó. Empecemos con lo que más se subestima: el nombre.');
+d('maca','¿Es tan importante? Tengo varias ideas: "Naturale", "ManaPerú"…');
+d('sofia','Es uno de los elementos MÁS importantes de la identidad. Y la mayoría lo escoge en una tarde con tres amigos. Error.');
+learn('Importancia del naming',
+  '',
+  `<p>Un nombre efectivo:</p>
+   <ul>
+    <li><strong>Diferencia</strong> a tu empresa en mercados saturados.</li>
+    <li>Facilita la <strong>recordación</strong> del consumidor.</li>
+    <li>Construye la <strong>identidad de marca</strong>.</li>
+   </ul>
+   <p style="margin-top:10px">No es solo creatividad — es análisis estratégico, mercado y coherencia con tu propuesta de valor.</p>`);
+d('sofia','Hay 4 características de un buen nombre.');
+learn('Características de un buen nombre',
+  '',
+  `<ul>
+   <li><strong>Fácil de pronunciar.</strong></li>
+   <li><strong>Memorable.</strong></li>
+   <li><strong>Diferenciador.</strong></li>
+   <li><strong>Adaptable culturalmente</strong> (para no chocar en otros mercados).</li>
+   </ul>`);
+mini({
+  k:'mc',
+  title:'Maca descarta una mala característica',
+  sub:'¿Cuál NO es una característica de un buen nombre de marca?',
+  options:["Fácil de pronunciar","Difícil de recordar y muy largo","Diferenciador","Adaptable culturalmente"],
+  correct:1,
+  ok:'Sí. Si no se recuerda, no existe.',
+  no:'Un buen nombre se queda en la cabeza. Lo difícil de recordar pierde valor de marca.'
+});
+d('sofia','Ahora, hay 5 tipos de nombre. Decide a qué familia quieres pertenecer.');
+learn('Tipos de nombres de marca',
+  'Cinco familias:',
+  `<ul>
+   <li><strong>Descriptivos:</strong> describen directamente el producto. Ej: «Ferretería La Nacional».</li>
+   <li><strong>Evocativos:</strong> sugieren una experiencia o emoción.</li>
+   <li><strong>Inventados / neologismos:</strong> palabras creadas. Ej: <em>Google, Xerox</em>.</li>
+   <li><strong>Acrónimos:</strong> siglas. Ej: <em>IBM, KFC</em>.</li>
+   <li><strong>Metafóricos:</strong> usan analogía. Ej: <em>Apple, Amazon</em>.</li>
+   </ul>`);
+mini({
+  k:'match',
+  title:'Maca empareja tipos con ejemplos',
+  sub:'Une cada tipo con un ejemplo real:',
+  left:["Descriptivo","Neologismo (inventado)","Acrónimo","Metafórico"],
+  right:["Apple (frescura, innovación)","KFC (Kentucky Fried Chicken)","Google (palabra creada)","Ferretería La Nacional"],
+  pares:[[0,3],[1,2],[2,1],[3,0]],
+  ok:'Bien. Cada nombre tiene una intención estratégica detrás.',
+  no:'Descriptivo dice qué hace; metafórico usa analogía; neologismo es invento; acrónimo son siglas.'
+});
+d('sofia','El proceso de naming tiene 5 etapas. Mucha gente las saltea y termina mal.');
+learn('Las 5 etapas del proceso de naming',
+  '',
+  `<ul class="numbered">
+   <li>Definición de la <strong>identidad</strong> de marca.</li>
+   <li>Investigación del <strong>mercado</strong>.</li>
+   <li>Generación de <strong>ideas</strong>.</li>
+   <li><strong>Evaluación</strong> de opciones.</li>
+   <li><strong>Verificación legal</strong>.</li>
+   </ul>`);
+mini({
+  k:'orden',
+  title:'Maca ordena el proceso',
+  sub:'Las 5 etapas en orden:',
+  items:["Verificación legal","Definición de identidad de marca","Generación de ideas","Investigación del mercado","Evaluación de opciones"],
+  orden:[1,3,2,4,0],
+  ok:'Bien. Identidad → mercado → ideas → evaluación → legal.',
+  no:'Empieza por la identidad; termina siempre por la verificación legal.'
+});
+d('sofia','Y aquí donde casi todos se confunden: tagline, slogan y byline son TRES cosas distintas.');
+learn('Tagline · Slogan · Byline',
+  'Tres frases, tres funciones:',
+  `<ul>
+   <li><strong>Tagline:</strong> resume la <em>esencia</em> de la marca. Es <strong>permanente</strong>, ligada a la identidad.</li>
+   <li><strong>Slogan:</strong> frase de campaña publicitaria. <strong>Cambia</strong> con cada campaña.</li>
+   <li><strong>Byline:</strong> frase que <strong>acompaña al logotipo</strong> y describe la actividad de la empresa.</li>
+   </ul>
+   <p style="margin-top:12px;font-size:13px;color:#bcc4d8">Ejemplo para Maca:<br>· Tagline: «Vive natural».<br>· Slogan (campaña verano): «Edición primavera 2026: descubre lo nuevo».<br>· Byline (al lado del logo): «Bebidas naturales del Perú».</p>`);
+mini({
+  k:'vf',
+  title:'Maca distingue conceptos',
+  sub:'«El tagline puede cambiar en cada campaña publicitaria.» ¿V o F?',
+  correct:false,
+  ok:'¡Falso! Eso es el SLOGAN. El tagline es permanente.',
+  no:'Falso. Eso describe al SLOGAN. El TAGLINE es la esencia permanente de la marca.'
+});
+mini({
+  k:'vf',
+  title:'Maca confirma una idea',
+  sub:'«El byline acompaña al logotipo y describe la actividad de la empresa.» ¿V o F?',
+  correct:true,
+  ok:'¡Verdadero! Es la frase descriptiva pegada al logo.',
+  no:'Verdadero. El byline aclara qué hace la empresa cuando el nombre no lo dice.'
+});
+mini({
+  k:'match',
+  title:'Maca asigna frases',
+  sub:'Une cada tipo con su ejemplo:',
+  left:["Tagline (esencia)","Slogan (campaña)","Byline (descriptor del logo)"],
+  right:["«Edición primavera 2026: descubre lo nuevo»","«Bebidas naturales del Perú»","«Vive natural»"],
+  pares:[[0,2],[1,0],[2,1]],
+  ok:'Bien. Esencia, campaña, descriptor.',
+  no:'Permanente = tagline; temporal = slogan; descriptivo = byline.'
+});
+d('sofia','Y ahora lo que más cuesta: registrar. Si no registras, alguien más te lo gana.');
+learn('La verificación legal',
+  'Sin esto, todo lo anterior se cae:',
+  `<p>Antes de adoptar cualquier nombre, verifica que <strong>esté disponible legalmente</strong> y no infrinja marcas registradas.</p>
+   <p style="margin-top:10px">Sin registro, otra empresa puede apropiarse del nombre. La inversión en branding queda en el aire.</p>`);
+mini({
+  k:'errores',
+  title:'Maca evalúa cinco posibles nombres',
+  sub:'Marca todos los que tienen PROBLEMAS serios:',
+  items:[
+    {txt:"«MgxztPlus» — imposible de pronunciar",error:true},
+    {txt:"«BebeNatural» — claro, fácil y disponible",error:false},
+    {txt:"«Coca Cola Naturals» — choca con marca registrada",error:true},
+    {txt:"«La Bebida que Cura el Cáncer» — promesa falsa, problema legal",error:true},
+    {txt:"«Manantia» — evocativo, registrable, fácil de decir",error:false}
+  ],
+  ok:'Sí: imposible de pronunciar, infracción de marca, promesa engañosa.',
+  no:'Pista: difícil de decir, copiar marca registrada o promesa falsa = problema serio.'
+});
+d('maca','Sofía, una decisión real ya: tengo "Manantia" en la cabeza. Sugiere agua, manantial, frescura. ¿Qué tipo es?');
+mini({
+  k:'mc',
+  title:'Maca clasifica su nombre',
+  sub:'«Manantia» evoca un manantial, agua pura. ¿Qué tipo de nombre es?',
+  options:["Acrónimo","Descriptivo literal","Evocativo / metafórico","Neologismo legal"],
+  correct:2,
+  ok:'Sí. No describe el producto, lo evoca. Tipo evocativo/metafórico.',
+  no:'Manantia sugiere experiencia (manantial, frescura). Es evocativo, no descriptivo.'
+});
+journal('Diario de Maca · Capítulo 5',[
+  'Buen nombre: fácil de decir, memorable, diferenciador, adaptable.',
+  '5 tipos: descriptivo, evocativo, neologismo (Google), acrónimo (IBM), metafórico (Apple).',
+  'Proceso 5 etapas: identidad → mercado → ideas → evaluación → verificación legal.',
+  'Tagline (esencia), Slogan (campaña), Byline (descriptor del logo).',
+  'Sin verificación legal no hay marca: registrar es proteger.'
+]);
+d('sofia','Maca, ya tienes todo. Investigaste el mercado, aprendiste a iterar, encontraste el insight, prototipaste, y bautizaste.');
+d('sofia','Ahora viene lo que pocos llegan a vivir: el lanzamiento.');
+
+/* ===========================================================
+   EPÍLOGO
+=========================================================== */
+chapter('Epílogo','El lanzamiento','— tres meses después —','🚀','launch');
+s('launch','Bodega de Maca · 6:00 a.m. del día del lanzamiento');
+n('Cajas apiladas. La página web abre en T-30 minutos. Maca abre su cuaderno por última vez.');
+d('maca','Página: lista. Producto: validado con 80 personas. Stock: 200 unidades. Sofía registró Manantia. Vale me ayudó con el sprint final.');
+think('Tres meses. Cuatro mentores. Un cuaderno lleno. Y una marca que existe porque seguí un proceso, no una corazonada.');
+s('night','Esa misma noche · su departamento');
+n('21:48. Pedidos: 73. Comentarios buenos: 41. Devoluciones: 0. Insights nuevos para iterar: 12.');
+d('maca','Esto no termina aquí. Es el primer ciclo Build-Measure-Learn de mi vida. Mañana ya tengo que iterar.');
+d('maca','Pero por hoy… lo logré. Una marca de verdad, no una corazonada.');
+n('Maca cierra el cuaderno. La portada ya no dice "MI MARCA". Dice "Manantia · Vive natural".');
+ending();
+
+/* ===========================================================
+   ENGINE
+=========================================================== */
+let state={i:0,wrong:0,correct:0};
+
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
+function load(){try{const d=localStorage.getItem(STORAGE_KEY);if(!d)return null;return JSON.parse(d);}catch(e){return null;}}
+function reset(){try{localStorage.removeItem(STORAGE_KEY);}catch(e){}state={i:0,wrong:0,correct:0};}
+
+function $(s){return document.querySelector(s);}
+function el(tag,attrs={},...kids){const e=document.createElement(tag);for(const k in attrs){if(k==='class')e.className=attrs[k];else if(k==='html')e.innerHTML=attrs[k];else if(k.startsWith('on'))e.addEventListener(k.slice(2),attrs[k]);else e.setAttribute(k,attrs[k]);}for(const k of kids){if(k==null)continue;if(typeof k==='string')e.appendChild(document.createTextNode(k));else e.appendChild(k);}return e;}
+function shuffle(a){const r=a.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
+
+let currentSceneKey='apartment';
+let currentSceneLabel='';
+
+function applyScene(name,label){
+  currentSceneKey=name;
+  currentSceneLabel=label||'';
+  const sc=SCENES[name];if(!sc)return;
+  document.documentElement.style.setProperty('--scene',sc.tint);
+}
+
+function buildSceneStrip(){
+  const sc=SCENES[currentSceneKey];if(!sc)return null;
+  const strip=el('div',{class:'scene-strip'});
+  strip.appendChild(el('div',{class:'scene-strip-emoji'},sc.emoji));
+  const info=el('div',{class:'scene-strip-info'});
+  info.appendChild(el('div',{class:'scene-strip-name'},sc.name));
+  info.appendChild(el('div',{class:'scene-strip-when'},currentSceneLabel||sc.when));
+  strip.appendChild(info);
+  if(sc.tag)strip.appendChild(el('div',{class:'scene-strip-tag'},sc.tag));
+  return strip;
+}
+
+function topbar(){
+  const tb=$('#topbar');tb.innerHTML='';
+  // tomar el último chapter visto
+  let chapName='';for(let i=Math.min(state.i,beats.length-1);i>=0;i--)if(beats[i]&&beats[i].t==='chapter'){chapName=beats[i].num+' · '+beats[i].title;break;}
+  const left=el('div',{class:'tb-left'});
+  left.appendChild(el('div',{class:'logo'},'M'));
+  const ti=el('div',{class:'tb-title'});
+  ti.appendChild(document.createTextNode(`Maca y la marca`));
+  ti.appendChild(el('small',{},chapName||'novela visual interactiva'));
+  left.appendChild(ti);
+  tb.appendChild(left);
+  const right=el('div',{class:'tb-right'});
+  const bar=el('div',{class:'bar'});
+  const pct=Math.round(state.i/(beats.length-1)*100);
+  bar.appendChild(el('i',{style:`width:${pct}%`}));
+  right.appendChild(bar);
+  right.appendChild(el('button',{class:'icon-btn',title:'Reiniciar',onclick:()=>{if(confirm('¿Reiniciar la historia? Perderás tu progreso.')){reset();render();}},'aria-label':'Reiniciar'},'↺'));
+  tb.appendChild(right);
+}
+
+function render(){
+  const main=$('#main');main.innerHTML='';
+  // intro
+  if(state.i===0&&!load()){renderWelcome();return;}
+  if(state.i>=beats.length){renderEnd();return;}
+  const b=beats[state.i];
+  topbar();
+  // prepend scene strip on in-story beats
+  if(['narr','dial','learn','mini'].includes(b.t)){
+    const s=buildSceneStrip();if(s)main.appendChild(s);
+  }
+  switch(b.t){
+    case'scene':applyScene(b.scene,b.title);advance(true);break;
+    case'chapter':renderChapterCard(b);break;
+    case'narr':renderNarr(b);break;
+    case'dial':renderDial(b);break;
+    case'learn':renderLearn(b);break;
+    case'mini':renderMini(b);break;
+    case'journal':renderJournal(b);break;
+    case'ending':renderEnd();break;
+  }
+  save();
+}
+
+function renderWelcome(){
+  applyScene('apartment');
+  const main=$('#main');
+  const w=el('div',{class:'welcome'});
+  w.appendChild(el('div',{class:'maca-hero'},'👩🏽'));
+  w.appendChild(el('div',{class:'tag'},'una novela visual interactiva'));
+  w.appendChild(el('h1',{},'Maca y la marca'));
+  w.appendChild(el('p',{class:'desc'},'Maca tiene una idea de marca y un cuaderno casi vacío. En 5 capítulos vas a recorrer con ella el camino real: el mercado, el coworking, el café, el taller y el estudio. Vas a conocer a sus mentores, vas a aprender lo que ellos le enseñan, y vas a tomar las decisiones que la llevan al lanzamiento.'));
+  const cast=el('div',{class:'cast'});
+  ['maca','carlos','vale','tito','lia','sofia'].forEach(k=>{
+    const c=CHARS[k];
+    const cd=el('div',{class:'cast-card'});
+    cd.appendChild(el('div',{class:'cast-emoji'},c.emoji));
+    cd.appendChild(el('div',{class:'cast-name'},c.name));
+    cd.appendChild(el('div',{class:'cast-role'},c.role));
+    cast.appendChild(cd);
+  });
+  w.appendChild(cast);
+  const row=el('div',{class:'row'});
+  row.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{state.i=1;render();}},'▶ Empezar la historia'));
+  const saved=load();
+  if(saved&&saved.i>1){
+    row.appendChild(el('button',{class:'btn btn-ghost',onclick:()=>{state=saved;render();}},'⏭ Continuar'));
+  }
+  w.appendChild(row);
+  main.appendChild(w);
+  topbar();
+}
+
+function renderChapterCard(b){
+  applyScene(b.scene);
+  const c=el('div',{class:'chapter-card'});
+  c.appendChild(el('div',{class:'chapter-num'},b.num));
+  c.appendChild(el('div',{class:'chapter-art'},b.art));
+  c.appendChild(el('h1',{class:'chapter-title'},b.title));
+  c.appendChild(el('div',{class:'chapter-tag'},'« '+b.tag+' »'));
+  const r=el('div',{class:'row'});
+  r.appendChild(el('button',{class:'btn btn-primary',onclick:advance},'Comenzar capítulo →'));
+  c.appendChild(r);
+  $('#main').appendChild(c);
+}
+
+function renderNarr(b){
+  const p=el('div',{class:'panel'});
+  const sp=el('div',{class:'speaker'});
+  sp.appendChild(el('div',{class:'avatar narr'},CHARS.narr.emoji));
+  const nm=el('div');nm.appendChild(el('div',{class:'spk-name'},'Narrador'));nm.appendChild(el('div',{class:'spk-role'},''));
+  sp.appendChild(nm);
+  p.appendChild(sp);
+  p.appendChild(el('div',{class:'dia-text narr',html:formatText(b.text)}));
+  const nx=el('div',{class:'next'});
+  nx.appendChild(el('span',{class:'tap-hint'},'toca continuar'));
+  nx.appendChild(el('button',{class:'btn btn-primary',onclick:advance},'Continuar ▶'));
+  p.appendChild(nx);
+  $('#main').appendChild(p);
+}
+
+function renderDial(b){
+  const c=CHARS[b.c]||CHARS.narr;
+  const p=el('div',{class:'panel'});
+  const sp=el('div',{class:'speaker'});
+  sp.appendChild(el('div',{class:'avatar '+c.cls},c.emoji));
+  const nm=el('div');nm.appendChild(el('div',{class:'spk-name'},c.name));if(c.role)nm.appendChild(el('div',{class:'spk-role'},c.role));
+  sp.appendChild(nm);
+  p.appendChild(sp);
+  p.appendChild(el('div',{class:'dia-text'+(b.thought?' thought':''),html:(b.thought?'<em style="font-style:italic">':'')+formatText(b.text)+(b.thought?'</em>':'')}));
+  const nx=el('div',{class:'next'});
+  nx.appendChild(el('button',{class:'btn btn-primary',onclick:advance},'Continuar ▶'));
+  p.appendChild(nx);
+  $('#main').appendChild(p);
+}
+
+function formatText(t){return t.replace(/«([^»]+)»/g,'<em>«$1»</em>');}
+
+function renderLearn(b){
+  const p=el('div',{class:'learn'});
+  p.appendChild(el('h3',{},b.title));
+  if(b.sub)p.appendChild(el('div',{class:'sub'},b.sub));
+  const body=el('div',{html:b.body});
+  p.appendChild(body);
+  const nx=el('div',{class:'next'});
+  nx.appendChild(el('button',{class:'btn btn-primary',onclick:advance},'Entendido ✓'));
+  p.appendChild(nx);
+  $('#main').appendChild(p);
+}
+
+function renderJournal(b){
+  const j=el('div',{class:'journal'});
+  j.appendChild(el('div',{class:'journal-title'},b.title));
+  const ul=el('ul');
+  b.items.forEach(it=>ul.appendChild(el('li',{},it)));
+  j.appendChild(ul);
+  const nx=el('div',{class:'next'});
+  nx.appendChild(el('button',{class:'btn btn-primary',onclick:advance},'Cerrar el diario ▶'));
+  j.appendChild(nx);
+  $('#main').appendChild(j);
+  // animación de páginas
+  setTimeout(()=>{j.scrollIntoView({behavior:'smooth',block:'center'});},100);
+}
+
+function advance(skipRender){
+  state.i++;
+  if(skipRender){
+    setTimeout(()=>render(),60);
+  }else{
+    render();
+  }
+}
+
+/* ===========================================================
+   MINI CHALLENGES
+=========================================================== */
+function renderMini(b){
+  const w=el('div',{class:'mini-wrap'});
+  w.appendChild(el('h3',{},b.title));
+  if(b.sub)w.appendChild(el('div',{class:'sub'},b.sub));
+  const body=el('div');
+  w.appendChild(body);
+  $('#main').appendChild(w);
+  switch(b.k){
+    case'mc':renderMC(b,body,w);break;
+    case'choice':renderChoice(b,body,w);break;
+    case'vf':renderVF(b,body,w);break;
+    case'orden':renderOrden(b,body,w);break;
+    case'match':renderMatch(b,body,w);break;
+    case'mapa':renderMapa(b,body,w);break;
+    case'pov':renderPOV(b,body,w);break;
+    case'errores':renderErrores(b,body,w);break;
+  }
+}
+
+function showMiniFeedback(w,ok,msg){
+  const fb=el('div',{class:'mini-feedback '+(ok?'ok':'no')},(ok?'✅ ':'💡 ')+msg);
+  w.appendChild(fb);
+  if(ok)state.correct++;else state.wrong++;
+  const nx=el('div',{class:'next'});
+  nx.appendChild(el('button',{class:'btn btn-primary',onclick:advance},'Continuar ▶'));
+  w.appendChild(nx);
+  // confetti pequeño en aciertos
+  if(ok)miniConfetti();
+}
+
+function miniConfetti(){
+  const colors=['#3b5cc4','#6c8df0','#f5a623','#4ade80','#22d3ee','#ff6b9d'];
+  for(let i=0;i<24;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'vw';
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    c.style.animation=`fall ${1.2+Math.random()*1.2}s linear ${Math.random()*.3}s forwards`;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+
+function renderMC(b,cont,w){
+  const opts=el('div',{class:'opts'});
+  let done=false;
+  b.options.forEach((op,i)=>{
+    const btn=el('button',{class:'opt','aria-label':op,onclick:()=>{
+      if(done)return;done=true;
+      [...opts.children].forEach((c,idx)=>{
+        c.disabled=true;
+        if(idx===b.correct)c.classList.add('correct');
+        else if(idx===i)c.classList.add('wrong');
+        else c.classList.add('dim');
+      });
+      const ok=i===b.correct;
+      showMiniFeedback(w,ok,ok?b.ok:b.no);
+    }});
+    btn.appendChild(el('div',{class:'let'},'ABCD'[i]));
+    btn.appendChild(el('div',{},op));
+    opts.appendChild(btn);
+  });
+  cont.appendChild(opts);
+}
+
+function renderChoice(b,cont,w){
+  const choices=el('div',{class:'choices'});
+  let done=false;
+  b.options.forEach((op,i)=>{
+    const btn=el('button',{class:'choice-btn',onclick:()=>{
+      if(done)return;done=true;
+      [...choices.children].forEach(c=>c.disabled=true);
+      btn.style.borderColor=i===b.correct?'var(--success)':'var(--warn)';
+      btn.style.background=i===b.correct?'rgba(74,222,128,.12)':'rgba(232,69,69,.12)';
+      const fb=el('div',{class:'mini-feedback'+(i===b.correct?' ok':' no')});
+      fb.appendChild(el('div',{html:'<strong>'+(i===b.correct?'✓ Buena decisión':'⚠ Esa no era la mejor')+':</strong> '+op.reply}));
+      if(b.feedback)fb.appendChild(el('div',{style:'margin-top:8px;color:#bcc4d8'},b.feedback));
+      w.appendChild(fb);
+      if(i===b.correct)state.correct++;else state.wrong++;
+      const nx=el('div',{class:'next'});
+      nx.appendChild(el('button',{class:'btn btn-primary',onclick:advance},'Continuar ▶'));
+      w.appendChild(nx);
+    }},op.text);
+    choices.appendChild(btn);
+  });
+  cont.appendChild(choices);
+}
+
+function renderVF(b,cont,w){
+  const r=el('div',{class:'vf-row'});
+  let done=false;
+  [['Verdadero','✓',true],['Falso','✗',false]].forEach(([t,ic,v])=>{
+    const btn=el('button',{class:'vf-btn','aria-label':t,onclick:()=>{
+      if(done)return;done=true;
+      [...r.children].forEach(c=>c.disabled=true);
+      const ok=v===b.correct;
+      btn.classList.add(ok?'correct':'wrong');
+      if(!ok){const other=[...r.children].find(c=>c!==btn);other.classList.add('correct');}
+      showMiniFeedback(w,ok,ok?b.ok:b.no);
+    }});
+    btn.appendChild(el('div',{class:'ico'},ic));
+    btn.appendChild(el('div',{},t));
+    r.appendChild(btn);
+  });
+  cont.appendChild(r);
+}
+
+function renderOrden(b,cont,w){
+  const list=el('div',{class:'ord-list'});
+  let order=shuffle(b.items.map((_,i)=>i));
+  let done=false;
+  function repaint(){
+    list.innerHTML='';
+    order.forEach((idx,pos)=>{
+      const it=el('div',{class:'ord-item'});
+      it.appendChild(el('div',{class:'pos'},String(pos+1)));
+      it.appendChild(el('div',{style:'flex:1'},b.items[idx]));
+      const ctrls=el('div',{class:'ord-controls'});
+      const up=el('button',{class:'ord-btn','aria-label':'Subir',onclick:()=>{if(done||pos===0)return;[order[pos-1],order[pos]]=[order[pos],order[pos-1]];repaint();}},'▲');
+      const dn=el('button',{class:'ord-btn','aria-label':'Bajar',onclick:()=>{if(done||pos===order.length-1)return;[order[pos+1],order[pos]]=[order[pos],order[pos+1]];repaint();}},'▼');
+      if(pos===0)up.disabled=true;
+      if(pos===order.length-1)dn.disabled=true;
+      ctrls.appendChild(up);ctrls.appendChild(dn);
+      it.appendChild(ctrls);
+      list.appendChild(it);
+    });
+  }
+  repaint();
+  cont.appendChild(list);
+  const btn=el('button',{class:'btn btn-primary',style:'margin-top:14px;width:100%',onclick:()=>{
+    if(done)return;done=true;
+    const ok=order.length===b.orden.length&&order.every((v,i)=>v===b.orden[i]);
+    [...list.children].forEach((it,i)=>{
+      const exp=b.orden[i];
+      it.classList.add(order[i]===exp?'ok':'bad');
+      it.querySelectorAll('button').forEach(x=>x.disabled=true);
+      if(order[i]!==exp){
+        const fix=el('div',{class:'ord-fix'},'✓ Aquí va: '+b.items[exp]);
+        it.appendChild(fix);
+      }
+    });
+    btn.disabled=true;
+    showMiniFeedback(w,ok,ok?b.ok:b.no);
+  }},'Confirmar orden');
+  cont.appendChild(btn);
+}
+
+function renderMatch(b,cont,w){
+  const grid=el('div',{class:'match-grid'});
+  const colL=el('div',{class:'match-col'});
+  const colR=el('div',{class:'match-col'});
+  const rOrder=shuffle(b.right.map((_,i)=>i));
+  let selL=null,matched={},done=false;
+  function paint(){
+    [...colL.children].forEach((it,i)=>{
+      it.classList.remove('selected','matched','matched-bad');
+      if(i in matched)it.classList.add('matched');
+      if(selL===i)it.classList.add('selected');
+    });
+    [...colR.children].forEach(it=>{
+      it.classList.remove('selected','matched');
+      const ridx=parseInt(it.dataset.ridx);
+      if(Object.values(matched).includes(ridx))it.classList.add('matched');
+    });
+  }
+  b.left.forEach((t,i)=>{
+    const it=el('div',{class:'match-item','aria-label':t,onclick:()=>{
+      if(done)return;
+      if(i in matched){delete matched[i];selL=null;paint();return;}
+      selL=i;paint();
+    }});
+    it.appendChild(el('span',{class:'tag'},'A'+(i+1)));
+    it.appendChild(el('span',{},t));
+    colL.appendChild(it);
+  });
+  rOrder.forEach(ridx=>{
+    const it=el('div',{class:'match-item',['data-ridx']:String(ridx),'aria-label':b.right[ridx],onclick:()=>{
+      if(done||selL===null)return;
+      const prev=Object.keys(matched).find(k=>matched[k]===ridx);
+      if(prev!==undefined)delete matched[prev];
+      matched[selL]=ridx;selL=null;paint();
+    }});
+    it.appendChild(el('span',{},b.right[ridx]));
+    colR.appendChild(it);
+  });
+  grid.appendChild(colL);grid.appendChild(colR);
+  cont.appendChild(grid);
+  const btn=el('button',{class:'btn btn-primary',style:'margin-top:14px;width:100%',onclick:()=>{
+    if(done)return;
+    if(Object.keys(matched).length<b.left.length){alert('Empareja todos antes de confirmar');return;}
+    done=true;
+    let allOk=true;
+    b.pares.forEach(([li,ri])=>{
+      const item=colL.children[li];
+      if(matched[li]===ri){item.classList.add('matched');}
+      else{item.classList.remove('matched');item.classList.add('matched-bad');allOk=false;
+        const fix=el('div',{class:'ord-fix',style:'color:var(--primary-l)'},'→ Va con: '+b.right[ri]);
+        item.appendChild(fix);}
+    });
+    btn.disabled=true;
+    showMiniFeedback(w,allOk,allOk?b.ok:b.no);
+  }},'Confirmar emparejamiento');
+  cont.appendChild(btn);
+}
+
+function renderMapa(b,cont,w){
+  const grid=el('div',{class:'map-grid'+(b.slots.length>=3?' cols-2':'')});
+  const placement={};
+  let selTag=null,done=false;
+  function paint(){
+    [...grid.children].forEach((s,i)=>{
+      s.classList.remove('filled','ok','bad');
+      const v=s.querySelector('.slot-val');
+      if(i in placement){s.classList.add('filled');v.textContent=b.tags[placement[i]];}
+      else v.textContent='—';
+    });
+    [...bank.children].forEach(p=>{
+      const idx=parseInt(p.dataset.idx);
+      if(Object.values(placement).includes(idx))p.classList.add('placed');
+      else p.classList.remove('placed');
+      p.classList.toggle('sel',selTag===idx);
+    });
+  }
+  b.slots.forEach((s,i)=>{
+    const slot=el('div',{class:'map-slot'});
+    slot.appendChild(el('div',{class:'slot-lbl'},s.lbl));
+    slot.appendChild(el('div',{class:'slot-val'},'—'));
+    slot.addEventListener('click',()=>{
+      if(done)return;
+      if(selTag!==null){
+        for(const k in placement)if(placement[k]===selTag)delete placement[k];
+        placement[i]=selTag;selTag=null;paint();return;
+      }
+      if(i in placement){delete placement[i];paint();}
+    });
+    slot.addEventListener('dragover',e=>{e.preventDefault();slot.classList.add('over');});
+    slot.addEventListener('dragleave',()=>slot.classList.remove('over'));
+    slot.addEventListener('drop',e=>{
+      e.preventDefault();slot.classList.remove('over');
+      if(done)return;
+      const idx=parseInt(e.dataTransfer.getData('idx'));
+      for(const k in placement)if(placement[k]===idx)delete placement[k];
+      placement[i]=idx;paint();
+    });
+    grid.appendChild(slot);
+  });
+  cont.appendChild(grid);
+  const bank=el('div',{class:'tags-bank'});
+  b.tags.forEach((t,i)=>{
+    const p=el('div',{class:'tag-pill','draggable':'true','data-idx':String(i),'aria-label':t,onclick:()=>{
+      if(done)return;
+      selTag=selTag===i?null:i;paint();
+    }});
+    p.textContent=t;
+    p.addEventListener('dragstart',e=>{e.dataTransfer.setData('idx',String(i));p.classList.add('dragging');});
+    p.addEventListener('dragend',()=>p.classList.remove('dragging'));
+    bank.appendChild(p);
+  });
+  cont.appendChild(bank);
+  const tip=el('div',{style:'font-size:12px;color:var(--muted);margin-top:8px;text-align:center'},'Arrástralo o tócalo y luego toca un slot');
+  cont.appendChild(tip);
+  const btn=el('button',{class:'btn btn-primary',style:'margin-top:14px;width:100%',onclick:()=>{
+    if(done)return;
+    if(Object.keys(placement).length<b.slots.length){alert('Llena todos los espacios antes de confirmar');return;}
+    done=true;
+    let allOk=true;
+    b.slots.forEach((_,i)=>{
+      const slot=grid.children[i];
+      if(placement[i]===b.orden[i])slot.classList.add('ok');
+      else{slot.classList.add('bad');allOk=false;
+        const fix=el('div',{class:'ord-fix'},'✓ Va: '+b.tags[b.orden[i]]);
+        slot.appendChild(fix);}
+    });
+    btn.disabled=true;
+    showMiniFeedback(w,allOk,allOk?b.ok:b.no);
+  }},'Confirmar mapa');
+  cont.appendChild(btn);
+}
+
+function renderPOV(b,cont,w){
+  const frame=el('div',{class:'pov-frame'});
+  const slots={};
+  const keys=['usuario','problema','insight'];
+  let ki=0,done=false;
+  b.plantilla.forEach((part,i)=>{
+    if(i%2===0){
+      const k=keys[ki++];
+      const sl=el('div',{class:'pov-slot','data-key':k});
+      sl.textContent='— elige —';
+      slots[k]=sl;
+      sl.addEventListener('dragover',e=>{e.preventDefault();sl.classList.add('over');});
+      sl.addEventListener('dragleave',()=>sl.classList.remove('over'));
+      sl.addEventListener('drop',e=>{
+        e.preventDefault();sl.classList.remove('over');
+        if(done)return;
+        const data=JSON.parse(e.dataTransfer.getData('p'));
+        if(data.k!==k)return;
+        sl.dataset.idx=String(data.i);sl.textContent=b.bancos[k][data.i];sl.classList.add('filled');
+      });
+      sl.addEventListener('click',()=>{
+        if(done)return;
+        delete sl.dataset.idx;sl.textContent='— elige —';sl.classList.remove('filled');
+      });
+      frame.appendChild(sl);
+    }else{
+      frame.appendChild(el('span',{class:'pov-fix'},part));
+    }
+  });
+  cont.appendChild(frame);
+  const banks=el('div',{class:'pov-bank'});
+  Object.keys(b.bancos).forEach(k=>{
+    banks.appendChild(el('span',{class:'pov-bank-lbl'},k.toUpperCase()));
+    const row=el('div',{class:'pov-bank-row'});
+    b.bancos[k].forEach((t,i)=>{
+      const p=el('div',{class:'tag-pill','draggable':'true','aria-label':t});
+      p.textContent=t;
+      p.addEventListener('dragstart',e=>{e.dataTransfer.setData('p',JSON.stringify({k,i}));p.classList.add('dragging');});
+      p.addEventListener('dragend',()=>p.classList.remove('dragging'));
+      p.addEventListener('click',()=>{
+        if(done)return;
+        const sl=slots[k];sl.dataset.idx=String(i);sl.textContent=t;sl.classList.add('filled');
+      });
+      row.appendChild(p);
+    });
+    banks.appendChild(row);
+  });
+  cont.appendChild(banks);
+  const btn=el('button',{class:'btn btn-primary',style:'margin-top:14px;width:100%',onclick:()=>{
+    if(done)return;
+    let allFilled=true;
+    Object.keys(slots).forEach(k=>{if(!('idx' in slots[k].dataset))allFilled=false;});
+    if(!allFilled){alert('Completa los 3 espacios');return;}
+    done=true;
+    let ok=true;
+    Object.keys(slots).forEach(k=>{
+      const sl=slots[k];
+      const idx=parseInt(sl.dataset.idx);
+      if(idx===b.correcto[k])sl.classList.add('ok');
+      else{sl.classList.add('bad');ok=false;
+        const fix=el('div',{style:'font-size:11px;color:var(--success);margin-top:4px;font-family:Inter,sans-serif'},'✓ '+b.bancos[k][b.correcto[k]]);
+        sl.appendChild(fix);}
+    });
+    btn.disabled=true;
+    showMiniFeedback(w,ok,ok?b.ok:b.no);
+  }},'Construir POV');
+  cont.appendChild(btn);
+}
+
+function renderErrores(b,cont,w){
+  const list=el('div',{class:'opts'});
+  const sel=new Set();let done=false;
+  b.items.forEach((it,i)=>{
+    const btn=el('button',{class:'opt','aria-label':it.txt,onclick:()=>{
+      if(done)return;
+      if(sel.has(i)){sel.delete(i);btn.style.borderColor='';btn.querySelector('.let').textContent=' ';btn.querySelector('.let').style.background='';btn.querySelector('.let').style.color='';}
+      else{sel.add(i);btn.style.borderColor='var(--warn)';const l=btn.querySelector('.let');l.textContent='✗';l.style.background='var(--warn)';l.style.color='#fff';}
+    }});
+    btn.appendChild(el('div',{class:'let'},' '));
+    btn.appendChild(el('div',{},it.txt));
+    list.appendChild(btn);
+  });
+  cont.appendChild(list);
+  const btn=el('button',{class:'btn btn-primary',style:'margin-top:14px;width:100%',onclick:()=>{
+    if(done)return;done=true;
+    let ok=true;
+    b.items.forEach((it,i)=>{
+      const opt=list.children[i];
+      const marked=sel.has(i);
+      opt.disabled=true;
+      if(it.error&&marked)opt.classList.add('correct');
+      else if(it.error&&!marked){opt.classList.add('wrong');ok=false;
+        const fix=el('div',{style:'font-size:11px;color:var(--warn);margin-top:4px;width:100%'},'✗ Era un error que debías marcar');
+        opt.appendChild(fix);}
+      else if(!it.error&&marked){opt.classList.add('wrong');ok=false;
+        const fix=el('div',{style:'font-size:11px;color:var(--success);margin-top:4px;width:100%'},'✓ Esta práctica es correcta');
+        opt.appendChild(fix);}
+      else opt.classList.add('dim');
+    });
+    btn.disabled=true;
+    showMiniFeedback(w,ok,ok?b.ok:b.no);
+  }},'Confirmar selección');
+  cont.appendChild(btn);
+}
+
+/* ===========================================================
+   FINAL
+=========================================================== */
+function renderEnd(){
+  applyScene('launch');
+  const main=$('#main');main.innerHTML='';
+  topbar();
+  const total=state.correct+state.wrong;
+  const pct=total?Math.round(state.correct/total*100):0;
+  const wrap=el('div',{class:'final'});
+  wrap.appendChild(el('div',{class:'maca-hero'},'🚀'));
+  wrap.appendChild(el('div',{class:'tag'},'fin de la historia'));
+  wrap.appendChild(el('h1',{},'Maca lanzó su marca.'));
+  wrap.appendChild(el('p',{class:'desc'},'Acompañaste a Maca por sus 5 mentores: Don Carlos, Vale, Tito, Lía y Sofía. Aprendiste el ciclo completo de cómo nace un producto y una marca, en orden y con sentido.'));
+  const stats=el('div',{class:'final-stat'});
+  stats.appendChild(el('div',{class:'box',html:`<div class="num">${state.correct}</div><div class="lab">Decisiones acertadas</div>`}));
+  stats.appendChild(el('div',{class:'box',html:`<div class="num">${pct}%</div><div class="lab">Aciertos</div>`}));
+  stats.appendChild(el('div',{class:'box',html:`<div class="num">5/5</div><div class="lab">Capítulos</div>`}));
+  wrap.appendChild(stats);
+
+  const summary=el('div',{class:'learn',style:'margin-top:18px'});
+  summary.appendChild(el('h3',{},'Todo el curso, en una imagen'));
+  summary.appendChild(el('div',{class:'sub'},'Lo que ahora sabes:'));
+  summary.appendChild(el('div',{html:`
+    <ul>
+     <li><strong>Cap. 1 · Estudio de mercado:</strong> 7 pasos, fuentes 1ª y 2ª, segmentación, competencia.</li>
+     <li><strong>Cap. 2 · Metodologías ágiles:</strong> Lean (Build-Measure-Learn), Scrum (3 roles), Design Thinking (5 fases), Tradicional vs Ágil.</li>
+     <li><strong>Cap. 3 · Insight y Definir:</strong> qué ES y qué NO ES un insight, caso Dove, POV, propuesta de valor, 7Rs, creatividad vs innovación.</li>
+     <li><strong>Cap. 4 · MVP y prototipado:</strong> 3C, niveles de fidelidad, MVP de Eric Ries, ejemplos Airbnb/Dropbox, matriz de feedback.</li>
+     <li><strong>Cap. 5 · Naming y marca:</strong> 5 tipos de nombres, 5 etapas del proceso, Tagline / Slogan / Byline, verificación legal.</li>
+    </ul>`}));
+  wrap.appendChild(summary);
+
+  const row=el('div',{class:'row'});
+  row.appendChild(el('button',{class:'btn btn-gold',onclick:()=>{
+    const t=`🎮 Maca y la marca · Gestión de Producto y Marca\nDecisiones acertadas: ${state.correct} (${pct}%)\nAcompañé a Maca a lanzar su marca.`;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(()=>{
+        const x=document.activeElement;const o=x.textContent;x.textContent='✓ Copiado';setTimeout(()=>x.textContent=o,1800);
+      });
+    }else alert(t);
+  }},'📋 Compartir resultado'));
+  row.appendChild(el('button',{class:'btn btn-primary',onclick:()=>{reset();render();}},'🔄 Volver a empezar'));
+  wrap.appendChild(row);
+  main.appendChild(wrap);
+  miniConfetti();setTimeout(miniConfetti,500);setTimeout(miniConfetti,1100);
+}
+
+/* ===========================================================
+   INIT
+=========================================================== */
+function init(){
+  const saved=load();
+  if(saved&&saved.i>0)state=saved;
+  render();
+}
+window.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
